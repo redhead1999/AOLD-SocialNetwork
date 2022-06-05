@@ -1,4 +1,4 @@
-package com.redhead.socialnetwork.presentation.create_post
+package com.redhead.socialnetwork.feature_post.presentation.create_post
 
 import android.net.Uri
 
