@@ -2,24 +2,30 @@ package com.redhead.socialnetwork.core.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import coil.ImageLoader
 import com.redhead.socialnetwork.core.domain.models.Post
 import com.redhead.socialnetwork.presentation.chat.ChatScreen
 import com.redhead.socialnetwork.presentation.main_feed.MainFeedScreen
 import com.redhead.socialnetwork.presentation.splash.SplashScreen
 import com.redhead.socialnetwork.presentation.activity.ActivityScreen
-import com.redhead.socialnetwork.presentation.create_post.CreatePostScreen
+import com.redhead.socialnetwork.feature_post.presentation.create_post.CreatePostScreen
 import com.redhead.socialnetwork.presentation.post_detail.PostDetailScreen
 import com.redhead.socialnetwork.presentation.profile.ProfileScreen
 import com.redhead.socialnetwork.core.util.Screen
 
 @ExperimentalMaterialApi
 @Composable
-fun Navigation(navController: NavHostController) {
+fun Navigation(
+    navController: NavHostController,
+    scaffoldState: ScaffoldState,
+    imageLoader: ImageLoader
+) {
     NavHost(
         navController = navController,
         startDestination = Screen.SplashScreen.route,
@@ -61,6 +67,8 @@ fun Navigation(navController: NavHostController) {
             CreatePostScreen(
                 onNavigateUp = navController::navigateUp,
                 onNavigate = navController::navigate,
+                scaffoldState = scaffoldState,
+                imageLoader = imageLoader
             )
         }
         composable(Screen.MainFeedScreen.route) {
