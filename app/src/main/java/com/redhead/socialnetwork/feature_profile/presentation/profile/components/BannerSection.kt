@@ -1,4 +1,4 @@
-package com.redhead.socialnetwork.presentation.profile.components
+package com.redhead.socialnetwork.feature_profile.presentation.profile.components
 
 import com.redhead.socialnetwork.R
 
@@ -27,6 +27,7 @@ fun BannerSection(
     iconSize: Dp = 35.dp,
     leftIconModifier: Modifier = Modifier,
     rightIconModifier: Modifier = Modifier,
+    onIconGroupWidthChange: (Int) -> Unit = {},
     onGitHubClick: () -> Unit = {},
     onInstagramClick: () -> Unit = {},
     onLinkedInClick: () -> Unit = {}

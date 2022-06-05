@@ -1,4 +1,4 @@
-package com.redhead.socialnetwork.presentation.profile
+package com.redhead.socialnetwork.feature_profile.presentation.profile
 
 data class ProfileToolbarState(
     val toolbarOffsetY: Float = 0f,

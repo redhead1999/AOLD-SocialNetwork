@@ -7,7 +7,7 @@ import com.redhead.socialnetwork.core.domain.models.Post
 import com.redhead.socialnetwork.core.util.Resource
 import com.redhead.socialnetwork.core.util.SimpleResource
 import com.redhead.socialnetwork.core.util.UiText
-import com.redhead.socialnetwork.feature_post.data.remote.request.PostApi
+import com.redhead.socialnetwork.feature_post.data.remote.PostApi
 import com.redhead.socialnetwork.feature_post.domain.repository.PostRepository
 import okio.IOException
 import retrofit2.HttpException

@@ -1,4 +1,4 @@
-package com.redhead.socialnetwork.presentation.profile
+package com.redhead.socialnetwork.feature_profile.presentation.profile
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
