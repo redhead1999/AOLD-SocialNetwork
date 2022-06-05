@@ -1,7 +1,7 @@
 package com.redhead.socialnetwork.di
 
 import com.google.gson.Gson
-import com.redhead.socialnetwork.feature_post.data.remote.request.PostApi
+import com.redhead.socialnetwork.feature_post.data.remote.PostApi
 import com.redhead.socialnetwork.feature_post.data.repository.PostRepositoryImpl
 import com.redhead.socialnetwork.feature_post.domain.repository.PostRepository
 import com.redhead.socialnetwork.feature_post.use_case.CreatePostUseCase
@@ -34,7 +34,6 @@ object PostModule {
     fun providePostRepository(api: PostApi, gson: Gson): PostRepository =
         PostRepositoryImpl(api, gson)
 
-
     @Provides
     @Singleton
     fun providePostUseCases(
@@ -43,4 +42,5 @@ object PostModule {
         getPostsForFollows = GetPostsForFollowsUseCase(repository),
         createPostUseCase = CreatePostUseCase(repository)
     )
+
 }

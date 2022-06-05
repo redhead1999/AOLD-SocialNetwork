@@ -12,7 +12,6 @@ import androidx.navigation.compose.composable
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import com.redhead.socialnetwork.core.domain.models.Post
-import com.redhead.socialnetwork.presentation.chat.ChatScreen
 import com.redhead.socialnetwork.presentation.main_feed.MainFeedScreen
 import com.redhead.socialnetwork.presentation.splash.SplashScreen
 import com.redhead.socialnetwork.presentation.activity.ActivityScreen
@@ -20,6 +19,7 @@ import com.redhead.socialnetwork.feature_post.presentation.create_post.CreatePos
 import com.redhead.socialnetwork.presentation.post_detail.PostDetailScreen
 import com.redhead.socialnetwork.feature_profile.presentation.profile.ProfileScreen
 import com.redhead.socialnetwork.core.util.Screen
+import com.redhead.socialnetwork.feature_chat.presentation.components.ChatScreen
 import com.redhead.socialnetwork.feature_profile.presentation.edit_profile.EditProfileScreen
 import com.redhead.socialnetwork.feature_profile.search.SearchScreen
 import kotlinx.coroutines.DelicateCoroutinesApi
