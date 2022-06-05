@@ -13,7 +13,7 @@ import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import com.redhead.socialnetwork.core.domain.models.Post
 import com.redhead.socialnetwork.presentation.main_feed.MainFeedScreen
-import com.redhead.socialnetwork.presentation.splash.SplashScreen
+import com.redhead.socialnetwork.feature_auth.splash.SplashScreen
 import com.redhead.socialnetwork.presentation.activity.ActivityScreen
 import com.redhead.socialnetwork.feature_post.presentation.create_post.CreatePostScreen
 import com.redhead.socialnetwork.presentation.post_detail.PostDetailScreen
@@ -88,7 +88,7 @@ fun Navigation(
         composable(Screen.MainFeedScreen.route) {
             MainFeedScreen(
                 onNavigateUp = navController::navigateUp,
-                onNavigate = navController::navigate
+                onNavigate = navController::navigate,
             )
         }
 
