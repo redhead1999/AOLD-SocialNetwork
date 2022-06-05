@@ -1,11 +1,10 @@
-package com.redhead.socialnetwork.feature_auth.splash
+package com.redhead.socialnetwork.feature_auth.presentation.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.redhead.socialnetwork.core.util.Resource
 import com.redhead.socialnetwork.core.util.Screen
-import com.redhead.socialnetwork.feature_auth.domain.use_case.AuthenticationUseCase
+import com.redhead.socialnetwork.feature_auth.domain.use_case.AuthenticateUseCase
 import com.redhead.socialnetwork.presentation.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -15,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val authenticationUseCase: AuthenticationUseCase
+    private val authenticateUseCase: AuthenticateUseCase
 ) : ViewModel() {
 
     private val _eventFlow = MutableSharedFlow<UiEvent>()
@@ -23,7 +22,7 @@ class SplashViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            when (authenticationUseCase()) {
+            when (authenticateUseCase()) {
                 is Resource.Success -> {
                     _eventFlow.emit(
                         UiEvent.Navigate(Screen.MainFeedScreen.route)

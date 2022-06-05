@@ -1,4 +1,4 @@
-package com.redhead.socialnetwork.feature_auth.splash
+package com.redhead.socialnetwork.feature_auth.presentation.splash
 
 import com.redhead.socialnetwork.R
 
