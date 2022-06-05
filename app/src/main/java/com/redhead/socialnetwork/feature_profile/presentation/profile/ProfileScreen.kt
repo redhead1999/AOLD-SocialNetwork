@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.redhead.socialnetwork.core.domain.models.User
+import com.redhead.socialnetwork.core.util.Screen
 import com.redhead.socialnetwork.presentation.ui.theme.ProfilePictureSizeLarge
 import com.redhead.socialnetwork.presentation.ui.theme.SpaceMedium
 import com.redhead.socialnetwork.presentation.ui.theme.SpaceSmall
@@ -108,7 +109,8 @@ fun ProfileScreen(
                         followerCount = 234,
                         followingCount = 534,
                         postCount = 65
-                    )
+                    ), onEditClick = { navController.navigate(Screen.EditProfileScreen.route) }
+
                 )
             }
             items(20) {

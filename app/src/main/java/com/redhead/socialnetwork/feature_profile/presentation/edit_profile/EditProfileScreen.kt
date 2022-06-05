@@ -59,7 +59,6 @@ fun EditProfileScreen(
     ) {
         StandardToolbar(
             onNavigateUp = onNavigateUp,
-            showBackArrow = true,
             navActions = {
                 IconButton(onClick = {}) {
                     Icon(
@@ -157,7 +156,7 @@ fun EditProfileScreen(
                         )
                     }
                 )
-                Spacer(modifier = androidx.compose.ui.Modifier.height(SpaceMedium))
+                Spacer(modifier = Modifier.height(SpaceMedium))
                 StandardTextField(
                     modifier = Modifier.fillMaxWidth(),
                     text = viewModel.bioState.value.text,
