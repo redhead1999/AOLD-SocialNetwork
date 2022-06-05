@@ -1,4 +1,4 @@
-package com.redhead.socialnetwork.presentation.profile.components
+package com.redhead.socialnetwork.feature_profile.presentation.profile.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -30,17 +30,17 @@ fun ProfileStats(
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        com.redhead.socialnetwork.feature_profile.presentation.profile.components.ProfileNumber(
+        ProfileNumber(
             number = user.followerCount,
             text = stringResource(id = R.string.followers)
         )
         Spacer(modifier = Modifier.width(SpaceLarge))
-        com.redhead.socialnetwork.feature_profile.presentation.profile.components.ProfileNumber(
+        ProfileNumber(
             number = user.followingCount,
             text = stringResource(id = R.string.following)
         )
         Spacer(modifier = Modifier.width(SpaceLarge))
-        com.redhead.socialnetwork.feature_profile.presentation.profile.components.ProfileNumber(
+        ProfileNumber(
             number = user.postCount,
             text = stringResource(id = R.string.posts)
         )

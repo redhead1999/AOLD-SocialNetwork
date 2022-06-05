@@ -4,11 +4,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import coil.ImageLoader
+import coil.annotation.ExperimentalCoilApi
 import com.redhead.socialnetwork.core.domain.models.Post
 import com.redhead.socialnetwork.presentation.chat.ChatScreen
 import com.redhead.socialnetwork.presentation.main_feed.MainFeedScreen
@@ -16,9 +18,15 @@ import com.redhead.socialnetwork.presentation.splash.SplashScreen
 import com.redhead.socialnetwork.presentation.activity.ActivityScreen
 import com.redhead.socialnetwork.feature_post.presentation.create_post.CreatePostScreen
 import com.redhead.socialnetwork.presentation.post_detail.PostDetailScreen
-import com.redhead.socialnetwork.presentation.profile.ProfileScreen
+import com.redhead.socialnetwork.feature_profile.presentation.profile.ProfileScreen
 import com.redhead.socialnetwork.core.util.Screen
+import com.redhead.socialnetwork.feature_profile.presentation.edit_profile.EditProfileScreen
+import com.redhead.socialnetwork.feature_profile.search.SearchScreen
+import kotlinx.coroutines.DelicateCoroutinesApi
 
+@ExperimentalCoilApi
+@DelicateCoroutinesApi
+@ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @Composable
 fun Navigation(
@@ -43,8 +51,14 @@ fun Navigation(
                 onNavigate = navController::navigate,
             )
         }
+        composable(Screen.SearchScreen.route) {
+            SearchScreen(navController = navController)
+        }
         composable(Screen.ProfileScreen.route) {
             ProfileScreen(navController = navController)
+        }
+        composable(Screen.EditProfileScreen.route) {
+            EditProfileScreen(navController = navController)
         }
         composable(Screen.PostDetailScreen.route) {
             PostDetailScreen(
@@ -75,6 +89,20 @@ fun Navigation(
             MainFeedScreen(
                 onNavigateUp = navController::navigateUp,
                 onNavigate = navController::navigate
+            )
+        }
+
+        composable(Screen.PostDetailScreen.route) {
+            PostDetailScreen(
+                navController = navController,
+                post = Post(
+                    username = "Just_Amalll",
+                    imageUrl = "",
+                    profilePictureUrl = "",
+                    description = "Some Random Text Here",
+                    likeCount = 17,
+                    commentCount = 7
+                )
             )
         }
     }
