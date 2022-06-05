@@ -1,4 +1,4 @@
-package com.redhead.socialnetwork.presentation.chat
+package com.redhead.socialnetwork.feature_chat.presentation.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
