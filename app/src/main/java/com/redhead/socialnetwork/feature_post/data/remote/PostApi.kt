@@ -1,4 +1,4 @@
-package com.redhead.socialnetwork.feature_post.data.remote.request
+package com.redhead.socialnetwork.feature_post.data.remote
 
 import com.redhead.socialnetwork.core.data.dto.response.BasicApiResponse
 import com.redhead.socialnetwork.core.domain.models.Post
