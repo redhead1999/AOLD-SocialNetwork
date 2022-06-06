@@ -54,7 +54,7 @@ fun MainFeedScreen(
         )
         StandardPost(
             post = Post(
-                username = "Юрий Кирилин",
+                username = "Just_Amalll",
                 imageUrl = "",
                 profilePictureUrl = "",
                 description = "Some Random Text Here",

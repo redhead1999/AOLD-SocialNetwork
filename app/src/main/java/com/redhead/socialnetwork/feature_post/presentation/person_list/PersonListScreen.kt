@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.navigation.NavController
 import coil.ImageLoader
 import com.redhead.socialnetwork.R
 import com.redhead.socialnetwork.core.domain.models.User
@@ -21,6 +22,7 @@ import com.redhead.socialnetwork.presentation.ui.theme.SpaceMedium
 @ExperimentalMaterialApi
 @Composable
 fun PersonListScreen(
+    navController: NavController,
     scaffoldState: ScaffoldState,
     imageLoader: ImageLoader,
     onNavigate: (String) -> Unit = {},

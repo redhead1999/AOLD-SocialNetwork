@@ -13,13 +13,16 @@ import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import com.redhead.socialnetwork.core.domain.models.Post
 import com.redhead.socialnetwork.presentation.main_feed.MainFeedScreen
-import com.redhead.socialnetwork.presentation.splash.SplashScreen
+import com.redhead.socialnetwork.feature_auth.presentation.splash.SplashScreen
 import com.redhead.socialnetwork.presentation.activity.ActivityScreen
 import com.redhead.socialnetwork.feature_post.presentation.create_post.CreatePostScreen
 import com.redhead.socialnetwork.presentation.post_detail.PostDetailScreen
 import com.redhead.socialnetwork.feature_profile.presentation.profile.ProfileScreen
 import com.redhead.socialnetwork.core.util.Screen
+import com.redhead.socialnetwork.feature_auth.presentation.login.LoginScreen
+import com.redhead.socialnetwork.feature_auth.presentation.register.RegisterScreen
 import com.redhead.socialnetwork.feature_chat.presentation.components.ChatScreen
+import com.redhead.socialnetwork.feature_post.presentation.person_list.PersonListScreen
 import com.redhead.socialnetwork.feature_profile.presentation.edit_profile.EditProfileScreen
 import com.redhead.socialnetwork.feature_profile.search.SearchScreen
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -40,7 +43,35 @@ fun Navigation(
         modifier = Modifier.fillMaxSize()
     ) {
         composable(Screen.SplashScreen.route) {
-            SplashScreen(navController = navController)
+            SplashScreen(
+                onPopBackStack = navController::popBackStack,
+                onNavigate = navController::navigate,
+            )
+        }
+        composable(Screen.LoginScreen.route) {
+            LoginScreen(
+                onNavigate = navController::navigate,
+                onLogin = {
+                    navController.popBackStack(route = Screen.LoginScreen.route, inclusive = true)
+                    navController.navigate(route = Screen.MainFeedScreen.route)
+                },
+                scaffoldState = scaffoldState
+            )
+        }
+        composable(Screen.RegisterScreen.route) {
+            RegisterScreen(
+                navController = navController,
+                scaffoldState = scaffoldState,
+                onPopBackStack = navController::popBackStack
+            )
+        }
+        composable(Screen.MainFeedScreen.route) {
+            MainFeedScreen(
+                onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate,
+                scaffoldState = scaffoldState,
+                imageLoader = imageLoader
+            )
         }
         composable(Screen.ChatScreen.route) {
             ChatScreen(navController = navController)
@@ -51,31 +82,11 @@ fun Navigation(
                 onNavigate = navController::navigate,
             )
         }
-        composable(Screen.SearchScreen.route) {
-            SearchScreen(navController = navController)
-        }
         composable(Screen.ProfileScreen.route) {
             ProfileScreen(navController = navController)
         }
         composable(Screen.EditProfileScreen.route) {
             EditProfileScreen(navController = navController)
-        }
-        composable(Screen.PostDetailScreen.route) {
-            PostDetailScreen(
-                navController = navController,
-                post = Post(
-                    username = "Philipp Lackner",
-                    imageUrl = "",
-                    profilePictureUrl = "",
-                    description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\n" +
-                            "diam nonumy eirmod tempor invidunt ut labore et dolore \n" +
-                            "magna aliquyam erat, sed diam voluptua Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\\n\" +\n" +
-                            "                    \"diam nonumy eirmod tempor invidunt ut labore et dolore \\n\" +\n" +
-                            "                    \"magna aliquyam erat, sed diam voluptua",
-                    likeCount = 17,
-                    commentCount = 7
-                )
-            )
         }
         composable(Screen.CreatePostScreen.route) {
             CreatePostScreen(
@@ -85,18 +96,20 @@ fun Navigation(
                 imageLoader = imageLoader
             )
         }
-        composable(Screen.MainFeedScreen.route) {
-            MainFeedScreen(
-                onNavigateUp = navController::navigateUp,
-                onNavigate = navController::navigate
-            )
+        composable(Screen.SearchScreen.route) {
+            SearchScreen(navController = navController)
         }
-
+        composable(Screen.PersonListScreen.route) {
+            PersonListScreen(
+                navController = navController,
+                scaffoldState = scaffoldState,
+                imageLoader = imageLoader)
+        }
         composable(Screen.PostDetailScreen.route) {
             PostDetailScreen(
                 navController = navController,
                 post = Post(
-                    username = "Just_Amalll",
+                    username = "Юрий Кирилин",
                     imageUrl = "",
                     profilePictureUrl = "",
                     description = "Some Random Text Here",
