@@ -31,7 +31,7 @@ object AuthModule {
 
     @Provides
     @Singleton
-    fun provideAuthRepository(api: AuthApi, sharedPreferences: SharedPreferences): AuthRepositoryImpl =
+    fun provideAuthRepository(api: AuthApi, sharedPreferences: SharedPreferences): AuthRepository =
         AuthRepositoryImpl(api, sharedPreferences)
 
     @Provides
@@ -48,5 +48,4 @@ object AuthModule {
     @Singleton
     fun provideAuthenticationUseCase(repository: AuthRepository): AuthenticateUseCase =
         AuthenticateUseCase(repository)
-
 }
