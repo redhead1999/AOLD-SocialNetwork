@@ -14,6 +14,6 @@ fun ChatScreen(navController: NavController) {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Chat screen")
+        Text(text = "Здесь будет мессенджер")
     }
 }
