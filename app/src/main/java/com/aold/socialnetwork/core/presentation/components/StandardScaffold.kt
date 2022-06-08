@@ -1,6 +1,7 @@
 package com.aold.socialnetwork.core.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -28,23 +29,24 @@ fun StandardScaffold(
         BottomNavItem(
             route = Screen.MainFeedScreen.route,
             icon = Icons.Outlined.Home,
-            contentDescription = "Home"
+            contentDescription = "Новости"
         ),
         BottomNavItem(
             route = Screen.ChatScreen.route,
             icon = Icons.Outlined.Message,
-            contentDescription = "Message"
+            contentDescription = "Мессенджер"
         ),
         BottomNavItem(route = "-"),
         BottomNavItem(
             route = Screen.ActivityScreen.route,
             icon = Icons.Outlined.Notifications,
-            contentDescription = "Activity"
+            alertCount = 99,
+            contentDescription = "Уведомления"
         ),
         BottomNavItem(
             route = Screen.ProfileScreen.route,
             icon = Icons.Outlined.Person,
-            contentDescription = "Profile"
+            contentDescription = "Профиль"
         ),
     ),
     onFabClick: () -> Unit = {},
@@ -54,7 +56,9 @@ fun StandardScaffold(
         bottomBar = {
             if (showBottomBar) {
                 BottomAppBar(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                        //.height(150.dp),
                     backgroundColor = MaterialTheme.colors.surface,
                     cutoutShape = CircleShape,
                     elevation = 5.dp

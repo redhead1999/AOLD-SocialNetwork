@@ -26,6 +26,7 @@
     <string name="make_post">Создать пост</string>
     <string name="back">Назад</string>
     <string name="your_feed">Новости</string>
+    <string name="your_chat">Мессенджер</string>
     <string name="liked">понравилось</string>
     <string name="commented_on">прокомментировал</string>
     <string name="your_post">твой пост</string>
