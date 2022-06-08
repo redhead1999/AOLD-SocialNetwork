@@ -3,6 +3,7 @@ package com.aold.socialnetwork.feature_notification
 import android.app.Application
 import com.onesignal.OneSignal
 
+
 class PushNotification : Application() {
     override fun onCreate() {
         super.onCreate()

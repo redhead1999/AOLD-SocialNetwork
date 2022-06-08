@@ -5,13 +5,13 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import com.aold.socialnetwork.R
 import com.aold.socialnetwork.core.domain.states.StandardTextFieldState
 import com.aold.socialnetwork.core.util.Resource
 import com.aold.socialnetwork.core.util.UiText
 import com.aold.socialnetwork.feature_post.use_case.PostUseCases
 import com.aold.socialnetwork.presentation.util.UiEvent
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
@@ -71,6 +71,7 @@ class CreatePostViewModel @Inject constructor(
                     }
                     _isLoading.value = false
                 }
+
             }
         }
     }

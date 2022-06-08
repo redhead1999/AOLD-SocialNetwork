@@ -2,6 +2,7 @@ package com.aold.socialnetwork.feature_post.presentation.create_post
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -20,9 +21,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
 import com.aold.socialnetwork.R
 import com.aold.socialnetwork.core.presentation.components.StandardTextField
 import com.aold.socialnetwork.core.presentation.components.StandardToolbar
+
 import com.aold.socialnetwork.feature_post.presentation.util.PostConstants
 import com.aold.socialnetwork.feature_post.presentation.util.PostDescriptionError
 import com.aold.socialnetwork.presentation.ui.theme.SpaceLarge
@@ -40,10 +43,10 @@ import kotlinx.coroutines.launch
 @ExperimentalCoilApi
 @Composable
 fun CreatePostScreen(
+    imageLoader: ImageLoader,
     onNavigateUp: () -> Unit = {},
     onNavigate: (String) -> Unit = {},
     scaffoldState: ScaffoldState,
-    imageLoader: ImageLoader,
     viewModel: CreatePostViewModel = hiltViewModel()
 ) {
     val imageUri = viewModel.chosenImageUri.value
@@ -74,8 +77,7 @@ fun CreatePostScreen(
                 is UiEvent.NavigateUp -> {
                     onNavigateUp()
                 }
-                else -> {
-                }
+                else -> {}
             }
         }
     }
@@ -109,7 +111,7 @@ fun CreatePostScreen(
                         shape = MaterialTheme.shapes.medium
                     )
                     .clickable {
-
+                        galleryLauncher.launch("image/*")
                     },
                 contentAlignment = Alignment.Center
             ) {
@@ -118,11 +120,20 @@ fun CreatePostScreen(
                     contentDescription = stringResource(id = R.string.choose_image),
                     tint = MaterialTheme.colors.onBackground
                 )
+                imageUri?.let { uri ->
+                    Image(
+                        painter = rememberImagePainter(
+                            data = uri,
+                            imageLoader = imageLoader
+                        ),
+                        contentDescription = stringResource(id = R.string.post_image),
+                        modifier = Modifier.matchParentSize()
+                    )
+                }
             }
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 text = viewModel.descriptionState.value.text,
                 hint = stringResource(id = R.string.description),
                 error = when (viewModel.descriptionState.value.error) {
@@ -149,7 +160,6 @@ fun CreatePostScreen(
                     color = MaterialTheme.colors.onPrimary
                 )
                 Spacer(modifier = Modifier.width(SpaceSmall))
-
                 if (viewModel.isLoading.value) {
                     CircularProgressIndicator(
                         color = MaterialTheme.colors.onPrimary,
@@ -159,7 +169,6 @@ fun CreatePostScreen(
                     )
                 } else {
                     Icon(imageVector = Icons.Default.Send, contentDescription = null)
-
                 }
             }
         }

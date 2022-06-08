@@ -1,6 +1,5 @@
 package com.aold.socialnetwork.core.presentation.components
 
-import com.aold.socialnetwork.R
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
@@ -21,21 +20,22 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import com.aold.socialnetwork.presentation.ui.theme.IconSizeMedium
+import com.aold.socialnetwork.R
 import com.aold.socialnetwork.core.util.TestTags
+import com.aold.socialnetwork.presentation.ui.theme.IconSizeMedium
 
 @Composable
 fun StandardTextField(
     modifier: Modifier = Modifier,
     text: String = "",
     hint: String = "",
-    maxLength: Int = 40,
     error: String = "",
     style: TextStyle = TextStyle(
         color = MaterialTheme.colors.onBackground
     ),
     singleLine: Boolean = true,
     maxLines: Int = 1,
+    maxLength: Int = 40,
     leadingIcon: ImageVector? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     isPasswordToggleDisplayed: Boolean = keyboardType == KeyboardType.Password,
@@ -44,8 +44,7 @@ fun StandardTextField(
     onValueChange: (String) -> Unit
 ) {
     Column(
-        modifier = modifier
-            .fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         TextField(
             value = text,
@@ -83,29 +82,22 @@ fun StandardTextField(
                 }
                 icon
             } else null,
-            trailingIcon = if(isPasswordToggleDisplayed) {
+            trailingIcon = if (isPasswordToggleDisplayed) {
                 val icon: @Composable () -> Unit = {
                     IconButton(
                         onClick = {
                             onPasswordToggleClick(!isPasswordVisible)
                         },
                         modifier = Modifier
-                            .semantics {
-                                testTag = TestTags.PASSWORD_TOGGLE
-                            }
+                            .semantics { testTag = TestTags.PASSWORD_TOGGLE }
                     ) {
                         Icon(
-                            imageVector = if (isPasswordVisible) {
-                                Icons.Filled.VisibilityOff
-                            } else {
-                                Icons.Filled.Visibility
-                            },
+                            imageVector = if (isPasswordVisible) Icons.Filled.VisibilityOff
+                            else Icons.Filled.Visibility,
                             tint = Color.White,
-                            contentDescription = if (isPasswordVisible) {
+                            contentDescription = if (isPasswordVisible)
                                 stringResource(id = R.string.password_visible_content_description)
-                            } else {
-                                stringResource(id = R.string.password_hidden_content_description)
-                            }
+                            else stringResource(id = R.string.password_hidden_content_description)
                         )
                     }
                 }
@@ -113,9 +105,7 @@ fun StandardTextField(
             } else null,
             modifier = Modifier
                 .fillMaxWidth()
-                .semantics {
-                    testTag = TestTags.STANDARD_TEXT_FIELD
-                }
+                .semantics { testTag = TestTags.STANDARD_TEXT_FIELD }
         )
         if (error.isNotEmpty()) {
             Text(
@@ -123,10 +113,8 @@ fun StandardTextField(
                 style = MaterialTheme.typography.body2,
                 color = MaterialTheme.colors.error,
                 textAlign = TextAlign.End,
-                modifier = Modifier
-                    .fillMaxWidth()
+                modifier = Modifier.fillMaxWidth()
             )
         }
     }
-
 }

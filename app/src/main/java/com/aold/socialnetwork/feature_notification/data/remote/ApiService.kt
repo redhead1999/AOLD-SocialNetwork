@@ -6,7 +6,7 @@ interface ApiService {
 
     companion object{
         //fixMe установить правильный хост и порт для теста
-        const val SEND_NOTIFICATION = "http://192.168.0.1:8080/sendNotification"
+        const val SEND_NOTIFICATION = "http://192.168.0.1:3000/sendNotification"
     }
 
 }

@@ -1,6 +1,5 @@
 package com.aold.socialnetwork.core.presentation.components
 
-import com.aold.socialnetwork.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,9 +32,11 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aold.socialnetwork.R
 import com.aold.socialnetwork.core.domain.models.Post
 import com.aold.socialnetwork.core.util.Constants
 import com.aold.socialnetwork.presentation.ui.theme.*
+
 
 @Composable
 fun StandardPost(
@@ -67,7 +68,7 @@ fun StandardPost(
                     .padding(SpaceMedium)
             ) {
                 ActionRow(
-                    username = "Юрий Кирилин",
+                    username = "Just_Amalll",
                     modifier = Modifier.fillMaxWidth(),
                     onLikeClick = {},
                     onCommentClick = {},
@@ -126,7 +127,7 @@ fun StandardPost(
         }
         if (showProfileImage) {
             Image(
-                painterResource(id = R.drawable.philipp),
+                painterResource(id = R.drawable.me),
                 contentDescription = "Profile picture",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

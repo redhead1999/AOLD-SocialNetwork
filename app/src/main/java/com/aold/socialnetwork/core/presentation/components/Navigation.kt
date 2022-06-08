@@ -12,19 +12,18 @@ import androidx.navigation.compose.composable
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import com.aold.socialnetwork.core.domain.models.Post
-import com.aold.socialnetwork.presentation.main_feed.MainFeedScreen
-import com.aold.socialnetwork.feature_auth.presentation.splash.SplashScreen
-import com.aold.socialnetwork.presentation.activity.ActivityScreen
-import com.aold.socialnetwork.feature_post.presentation.create_post.CreatePostScreen
-import com.aold.socialnetwork.presentation.post_detail.PostDetailScreen
-import com.aold.socialnetwork.feature_profile.presentation.profile.ProfileScreen
 import com.aold.socialnetwork.core.util.Screen
+import com.aold.socialnetwork.feature_activity.presentation.ActivityScreen
 import com.aold.socialnetwork.feature_auth.presentation.login.LoginScreen
 import com.aold.socialnetwork.feature_auth.presentation.register.RegisterScreen
+import com.aold.socialnetwork.feature_auth.presentation.splash.SplashScreen
 import com.aold.socialnetwork.feature_chat.presentation.components.ChatScreen
-import com.aold.socialnetwork.feature_post.presentation.person_list.PersonListScreen
+import com.aold.socialnetwork.feature_post.presentation.create_post.CreatePostScreen
 import com.aold.socialnetwork.feature_profile.presentation.edit_profile.EditProfileScreen
+import com.aold.socialnetwork.feature_profile.presentation.profile.ProfileScreen
 import com.aold.socialnetwork.feature_profile.search.SearchScreen
+import com.aold.socialnetwork.feature_post.presentation.main_feed.MainFeedScreen
+import com.aold.socialnetwork.feature_post.presentation.post_detail.PostDetailScreen
 import kotlinx.coroutines.DelicateCoroutinesApi
 
 @ExperimentalCoilApi
@@ -39,7 +38,7 @@ fun Navigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.MainFeedScreen.route,
+        startDestination = Screen.SplashScreen.route,
         modifier = Modifier.fillMaxSize()
     ) {
         composable(Screen.SplashScreen.route) {
@@ -99,17 +98,14 @@ fun Navigation(
         composable(Screen.SearchScreen.route) {
             SearchScreen(navController = navController)
         }
-        composable(Screen.PersonListScreen.route) {
-            PersonListScreen(
-                navController = navController,
-                scaffoldState = scaffoldState,
-                imageLoader = imageLoader)
-        }
+//        composable(Screen.PersonListScreen.route) {
+//            PersonListScreen(navController = navController)
+//        }
         composable(Screen.PostDetailScreen.route) {
             PostDetailScreen(
                 navController = navController,
                 post = Post(
-                    username = "Юрий Кирилин",
+                    username = "Just_Amalll",
                     imageUrl = "",
                     profilePictureUrl = "",
                     description = "Some Random Text Here",

@@ -1,6 +1,5 @@
 package com.aold.socialnetwork.core.presentation.components
 
-import com.aold.socialnetwork.R
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -17,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aold.socialnetwork.core.domain.models.BottomNavItem
 import com.aold.socialnetwork.core.util.Screen
+import com.aold.socialnetwork.R
 
 @Composable
 fun StandardScaffold(
@@ -35,7 +35,7 @@ fun StandardScaffold(
             icon = Icons.Outlined.Message,
             contentDescription = "Message"
         ),
-        BottomNavItem(route = ""),
+        BottomNavItem(route = "-"),
         BottomNavItem(
             route = Screen.ActivityScreen.route,
             icon = Icons.Outlined.Notifications,
@@ -60,11 +60,13 @@ fun StandardScaffold(
                     elevation = 5.dp
                 ) {
                     BottomNavigation {
-                        bottomNavItems.forEachIndexed { i, bottomNavItem ->
+                        bottomNavItems.forEachIndexed { _, bottomNavItem ->
                             StandardBottomNavItem(
                                 icon = bottomNavItem.icon,
                                 contentDescription = bottomNavItem.contentDescription,
-                                selected = bottomNavItem.route == navController.currentDestination?.route,
+                                selected = navController.currentDestination?.route?.startsWith(
+                                    bottomNavItem.route
+                                ) == true,
                                 alertCount = bottomNavItem.alertCount,
                                 enabled = bottomNavItem.icon != null
                             ) {
@@ -77,6 +79,7 @@ fun StandardScaffold(
                 }
             }
         },
+        scaffoldState = state,
         floatingActionButton = {
             if (showBottomBar) {
                 FloatingActionButton(
