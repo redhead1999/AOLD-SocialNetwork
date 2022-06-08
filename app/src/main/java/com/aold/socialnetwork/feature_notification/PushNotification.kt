@@ -12,7 +12,7 @@ class PushNotification : Application() {
     }
 
     companion object{
-        private const val ONESIGNAL_APP_ID = ""
+        private const val ONESIGNAL_APP_ID = "338e954b-c0a5-4e2a-a558-d1f7d02109e9"
     }
 
 }
