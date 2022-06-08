@@ -18,10 +18,12 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aold.socialnetwork.R
 import com.aold.socialnetwork.presentation.ui.theme.HintGray
 import com.aold.socialnetwork.presentation.ui.theme.SpaceSmall
 
@@ -48,6 +50,10 @@ fun RowScope.StandardBottomNavItem(
     )
 
     BottomNavigationItem(
+        //fixMe если захочется лейблы к иконкам
+//        label = {
+//            Text(stringResource(id = R.string.your_feed))
+//        },
         selected = selected,
         onClick = onClick,
         modifier = modifier,

@@ -17,12 +17,13 @@ import com.aold.socialnetwork.feature_activity.presentation.ActivityScreen
 import com.aold.socialnetwork.feature_auth.presentation.login.LoginScreen
 import com.aold.socialnetwork.feature_auth.presentation.register.RegisterScreen
 import com.aold.socialnetwork.feature_auth.presentation.splash.SplashScreen
-import com.aold.socialnetwork.feature_chat.presentation.components.ChatScreen
+import com.aold.socialnetwork.feature_chat.presentation.chat.ChatScreen
 import com.aold.socialnetwork.feature_post.presentation.create_post.CreatePostScreen
 import com.aold.socialnetwork.feature_profile.presentation.edit_profile.EditProfileScreen
 import com.aold.socialnetwork.feature_profile.presentation.profile.ProfileScreen
 import com.aold.socialnetwork.feature_profile.search.SearchScreen
 import com.aold.socialnetwork.feature_post.presentation.main_feed.MainFeedScreen
+import com.aold.socialnetwork.feature_post.presentation.person_list.PersonListScreen
 import com.aold.socialnetwork.feature_post.presentation.post_detail.PostDetailScreen
 import kotlinx.coroutines.DelicateCoroutinesApi
 
@@ -38,7 +39,7 @@ fun Navigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.SplashScreen.route,
+        startDestination = Screen.MainFeedScreen.route,
         modifier = Modifier.fillMaxSize()
     ) {
         composable(Screen.SplashScreen.route) {
@@ -73,7 +74,12 @@ fun Navigation(
             )
         }
         composable(Screen.ChatScreen.route) {
-            ChatScreen(navController = navController)
+            ChatScreen(
+                navController = navController,
+                onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate,
+                username = "username",
+            )
         }
         composable(Screen.ActivityScreen.route) {
             ActivityScreen(
@@ -98,9 +104,13 @@ fun Navigation(
         composable(Screen.SearchScreen.route) {
             SearchScreen(navController = navController)
         }
-//        composable(Screen.PersonListScreen.route) {
-//            PersonListScreen(navController = navController)
-//        }
+        composable(Screen.PersonListScreen.route) {
+            PersonListScreen(
+                navController = navController,
+                scaffoldState = scaffoldState,
+                imageLoader = imageLoader
+            )
+        }
         composable(Screen.PostDetailScreen.route) {
             PostDetailScreen(
                 navController = navController,
