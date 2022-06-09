@@ -26,30 +26,23 @@ fun BannerSection(
     iconSize: Dp = 35.dp,
     leftIconModifier: Modifier = Modifier,
     rightIconModifier: Modifier = Modifier,
-    onIconGroupWidthChange: (Int) -> Unit = {},
     onGitHubClick: () -> Unit = {},
     onInstagramClick: () -> Unit = {},
     onLinkedInClick: () -> Unit = {}
 ) {
-    BoxWithConstraints(
-        modifier = modifier
-    ) {
+    BoxWithConstraints(modifier = modifier) {
         Image(
             painter = painterResource(id = R.drawable.channelart),
             contentDescription = stringResource(id = R.string.banner_image),
             contentScale = ContentScale.Crop,
-            modifier = imageModifier
-                .fillMaxSize()
+            modifier = imageModifier.fillMaxSize()
         )
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(
                     brush = Brush.verticalGradient(
-                        colors = listOf(
-                            Color.Transparent,
-                            Color.Black
-                        ),
+                        colors = listOf(Color.Transparent, Color.Black),
                         startY = constraints.maxHeight - iconSize.toPx() * 2f
                     )
                 )
@@ -63,7 +56,7 @@ fun BannerSection(
             Spacer(modifier = Modifier.width(SpaceSmall))
             Image(
                 painter = painterResource(id = R.drawable.ic_js_logo),
-                contentDescription = "Javscript",
+                contentDescription = "Javascript",
                 modifier = Modifier.height(iconSize)
             )
             Spacer(modifier = Modifier.width(SpaceMedium))
@@ -79,7 +72,6 @@ fun BannerSection(
                 modifier = Modifier.height(iconSize)
             )
         }
-
         Row(
             modifier = rightIconModifier
                 .height(iconSize)

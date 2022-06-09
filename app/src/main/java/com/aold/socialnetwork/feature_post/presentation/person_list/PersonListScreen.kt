@@ -14,7 +14,7 @@ import coil.ImageLoader
 import com.aold.socialnetwork.R
 import com.aold.socialnetwork.core.domain.models.User
 import com.aold.socialnetwork.core.presentation.components.StandardToolbar
-import com.aold.socialnetwork.presentation.profile.components.UserProfileItem
+import com.aold.socialnetwork.feature_profile.presentation.profile.components.UserProfileItem
 import com.aold.socialnetwork.presentation.ui.theme.IconSizeMedium
 import com.aold.socialnetwork.presentation.ui.theme.SpaceLarge
 import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium

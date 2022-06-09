@@ -32,7 +32,7 @@ fun StandardScaffold(
             contentDescription = "Новости"
         ),
         BottomNavItem(
-            route = Screen.ChatScreen.route,
+            route = Screen.RoomsScreen.route,
             icon = Icons.Outlined.Message,
             contentDescription = "Мессенджер"
         ),

@@ -1,5 +1,6 @@
 package com.aold.socialnetwork.feature_profile.presentation.edit_profile
 
+import androidx.activity.compose.BackHandler
 import com.aold.socialnetwork.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -37,6 +38,7 @@ import com.google.accompanist.flowlayout.MainAxisAlignment
 import com.aold.socialnetwork.core.domain.states.StandardTextFieldState
 import com.aold.socialnetwork.core.presentation.components.StandardTextField
 import com.aold.socialnetwork.core.presentation.components.StandardToolbar
+import com.aold.socialnetwork.core.util.Screen
 import com.aold.socialnetwork.feature_profile.presentation.edit_profile.components.Chip
 import com.aold.socialnetwork.feature_profile.util.EditProfileError
 import com.aold.socialnetwork.presentation.ui.theme.ProfilePictureSizeLarge
@@ -56,6 +58,7 @@ fun EditProfileScreen(
     ) {
         StandardToolbar(
             onNavigateUp = onNavigateUp,
+            showBackArrow = true,
             navActions = {
                 IconButton(onClick = {}) {
                     Icon(

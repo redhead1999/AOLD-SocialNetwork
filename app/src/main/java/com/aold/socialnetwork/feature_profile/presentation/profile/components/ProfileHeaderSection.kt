@@ -28,19 +28,14 @@ fun ProfileHeaderSection(
     onEditClick: () -> Unit = {}
 ) {
     Column(
-        modifier = modifier
-            .fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .offset(
-                    x =
-                    if (isOwnProfile) {
-                        (30.dp + SpaceSmall) / 2f
-                    } else 0.dp
+                    x = if (isOwnProfile) (30.dp + SpaceSmall) / 2f else 0.dp
                 )
         ) {
             Text(
@@ -70,9 +65,6 @@ fun ProfileHeaderSection(
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(SpaceLarge))
-        ProfileStats(
-            user = user,
-            isOwnProfile = isOwnProfile
-        )
+        ProfileStats(user = user, isOwnProfile = isOwnProfile)
     }
 }

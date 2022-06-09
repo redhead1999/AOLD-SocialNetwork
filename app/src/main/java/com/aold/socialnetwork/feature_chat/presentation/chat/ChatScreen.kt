@@ -1,6 +1,7 @@
 package com.aold.socialnetwork.feature_chat.presentation.chat
 
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -30,19 +31,20 @@ import androidx.navigation.NavController
 import com.aold.socialnetwork.R
 import com.aold.socialnetwork.core.presentation.components.StandardToolbar
 import com.aold.socialnetwork.core.util.Screen
+import com.aold.socialnetwork.core.util.UiEvent
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun ChatScreen(
-    navController: NavController,
-    onNavigate: (String) -> Unit = {},
     onNavigateUp: () -> Unit = {},
+    navController: NavController,
     username: String?,
     viewModel: ChatViewModel = hiltViewModel()
 ) {
 
     StandardToolbar(
         onNavigateUp = onNavigateUp,
+        showBackArrow = true,
         title = {
             Text(
                 text = stringResource(id = R.string.your_chat),
@@ -50,20 +52,9 @@ fun ChatScreen(
                 color = MaterialTheme.colors.onBackground
             )
         },
-        modifier = Modifier.fillMaxWidth(),
-        showBackArrow = true,
-        navActions = {
-            IconButton(onClick = {
-                navController.navigate(Screen.SearchScreen.route)
-            }) {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "",
-                    tint = MaterialTheme.colors.onBackground
-                )
-            }
-        }
     )
+    BackHandler(enabled = true)
+    { navController.navigate(Screen.RoomsScreen.route) }
 
     val context = LocalContext.current
     LaunchedEffect(key1 = true) {

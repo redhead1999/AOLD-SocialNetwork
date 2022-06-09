@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.aold.socialnetwork.feature_chat.data.remote.ChatSocketService
 import com.aold.socialnetwork.feature_chat.data.remote.MessageService
 import com.aold.socialnetwork.feature_chat.util.Resource
-import com.aold.socialnetwork.presentation.util.UiEvent
+import com.aold.socialnetwork.core.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow

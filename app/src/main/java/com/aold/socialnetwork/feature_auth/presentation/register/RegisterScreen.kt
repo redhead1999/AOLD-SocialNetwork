@@ -26,8 +26,8 @@ import com.aold.socialnetwork.core.util.Constants
 import com.aold.socialnetwork.feature_auth.presentation.util.AuthError
 import com.aold.socialnetwork.presentation.ui.theme.SpaceLarge
 import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium
-import com.aold.socialnetwork.presentation.util.UiEvent
-import com.aold.socialnetwork.presentation.util.asString
+import com.aold.socialnetwork.core.util.UiEvent
+import com.aold.socialnetwork.core.util.asString
 import kotlinx.coroutines.flow.collectLatest
 
 @ExperimentalComposeUiApi

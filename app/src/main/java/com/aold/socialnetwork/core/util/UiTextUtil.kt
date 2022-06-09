@@ -1,4 +1,4 @@
-package com.aold.socialnetwork.presentation.util
+package com.aold.socialnetwork.core.util
 
 import android.content.Context
 import androidx.compose.runtime.Composable

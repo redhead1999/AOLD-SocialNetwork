@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                         navController = navController,
                         showBottomBar = navBackStackEntry?.destination?.route in listOf(
                             Screen.MainFeedScreen.route,
-                            Screen.ChatScreen.route,
+                            Screen.RoomsScreen.route,
                             Screen.ActivityScreen.route,
                             Screen.ProfileScreen.route,
                         ),
