@@ -11,7 +11,7 @@ import com.aold.socialnetwork.core.domain.states.StandardTextFieldState
 import com.aold.socialnetwork.core.util.Resource
 import com.aold.socialnetwork.core.util.UiText
 import com.aold.socialnetwork.feature_post.use_case.PostUseCases
-import com.aold.socialnetwork.presentation.util.UiEvent
+import com.aold.socialnetwork.core.util.UiEvent
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch

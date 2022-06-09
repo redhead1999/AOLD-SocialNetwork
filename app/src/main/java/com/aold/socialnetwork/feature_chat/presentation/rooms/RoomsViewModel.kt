@@ -1,4 +1,4 @@
-package com.aold.socialnetwork.feature_chat.presentation.username
+package com.aold.socialnetwork.feature_chat.presentation.rooms
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class UsernameViewModel @Inject constructor() : ViewModel() {
+class RoomsViewModel @Inject constructor() : ViewModel() {
 
     private val _usernameText = mutableStateOf("")
     val usernameText: State<String> = _usernameText

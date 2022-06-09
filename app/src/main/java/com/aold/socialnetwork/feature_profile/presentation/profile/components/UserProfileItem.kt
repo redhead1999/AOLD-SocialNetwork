@@ -1,4 +1,4 @@
-package com.aold.socialnetwork.presentation.profile.components
+package com.aold.socialnetwork.feature_profile.presentation.profile.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*

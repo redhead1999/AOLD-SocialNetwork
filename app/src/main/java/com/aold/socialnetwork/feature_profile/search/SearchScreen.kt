@@ -10,7 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -20,7 +20,7 @@ import com.aold.socialnetwork.core.domain.models.User
 import com.aold.socialnetwork.core.domain.states.StandardTextFieldState
 import com.aold.socialnetwork.core.presentation.components.StandardTextField
 import com.aold.socialnetwork.core.presentation.components.StandardToolbar
-import com.aold.socialnetwork.presentation.profile.components.UserProfileItem
+import com.aold.socialnetwork.feature_profile.presentation.profile.components.UserProfileItem
 import com.aold.socialnetwork.presentation.ui.theme.IconSizeMedium
 import com.aold.socialnetwork.presentation.ui.theme.SpaceLarge
 import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium
@@ -30,7 +30,7 @@ import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium
 fun SearchScreen(
     navController: NavController,
     onNavigateUp: () -> Unit = {},
-    viewModel: SearchViewModel = hiltViewModel()
+    viewModel: SearchViewModel = hiltViewModel(),
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
@@ -46,6 +46,7 @@ fun SearchScreen(
                 )
             }
         )
+
         Column(
             modifier = Modifier
                 .fillMaxSize()

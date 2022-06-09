@@ -60,7 +60,7 @@ fun MainFeedScreen(
                 commentCount = 7
             ),
             onPostClick = {
-
+                onNavigate(Screen.PostDetailScreen.route)
             }
         )
     }

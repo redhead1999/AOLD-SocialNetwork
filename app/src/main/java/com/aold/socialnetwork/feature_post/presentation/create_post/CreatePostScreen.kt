@@ -31,9 +31,9 @@ import com.aold.socialnetwork.feature_post.presentation.util.PostDescriptionErro
 import com.aold.socialnetwork.presentation.ui.theme.SpaceLarge
 import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium
 import com.aold.socialnetwork.presentation.ui.theme.SpaceSmall
-import com.aold.socialnetwork.presentation.util.CropActivityResultContract
-import com.aold.socialnetwork.presentation.util.UiEvent
-import com.aold.socialnetwork.presentation.util.asString
+import com.aold.socialnetwork.core.util.CropActivityResultContract
+import com.aold.socialnetwork.core.util.UiEvent
+import com.aold.socialnetwork.core.util.asString
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collectLatest
