@@ -1,5 +1,6 @@
 package com.aold.socialnetwork.core.presentation.components
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ScaffoldState
@@ -29,6 +30,7 @@ import com.aold.socialnetwork.feature_post.presentation.person_list.PersonListSc
 import com.aold.socialnetwork.feature_post.presentation.post_detail.PostDetailScreen
 import kotlinx.coroutines.DelicateCoroutinesApi
 
+@OptIn(ExperimentalAnimationApi::class)
 @ExperimentalCoilApi
 @DelicateCoroutinesApi
 @ExperimentalComposeUiApi
