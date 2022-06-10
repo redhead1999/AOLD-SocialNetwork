@@ -1,7 +1,6 @@
 package com.aold.socialnetwork.core.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -40,7 +39,7 @@ fun StandardScaffold(
         BottomNavItem(
             route = Screen.ActivityScreen.route,
             icon = Icons.Outlined.Notifications,
-            alertCount = 99,
+            alertCount = Int.MAX_VALUE,
             contentDescription = "Уведомления"
         ),
         BottomNavItem(
