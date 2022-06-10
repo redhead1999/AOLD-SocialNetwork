@@ -7,16 +7,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
@@ -37,10 +31,8 @@ import androidx.navigation.NavController
 import com.aold.socialnetwork.core.domain.models.Post
 import com.aold.socialnetwork.core.domain.models.User
 import com.aold.socialnetwork.core.presentation.components.StandardPost
-import com.aold.socialnetwork.core.presentation.components.StandardToolbar
 import com.aold.socialnetwork.core.util.Screen
 import com.aold.socialnetwork.presentation.ui.theme.ProfilePictureSizeLarge
-import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium
 import com.aold.socialnetwork.presentation.ui.theme.SpaceSmall
 import com.aold.socialnetwork.core.util.toPx
 import com.aold.socialnetwork.feature_profile.presentation.profile.components.BannerSection
@@ -110,7 +102,8 @@ fun ProfileScreen(
                         followerCount = 702,
                         followingCount = 410,
                         postCount = 4
-                    ), onEditClick = { navController.navigate(Screen.EditProfileScreen.route) }
+                    ),
+                    onEditClick = { navController.navigate(Screen.EditProfileScreen.route) },
                 )
             }
             items(4) {
@@ -137,6 +130,7 @@ fun ProfileScreen(
             modifier = Modifier.align(Alignment.TopCenter)
         ) {
             BannerSection(
+                onExitClick= { navController.navigate(Screen.LoginScreen.route) },
                 modifier = Modifier.height(
                     (bannerHeight * toolbarState.expandedRatio).coerceIn(
                         minimumValue = toolbarHeightCollapsed,
