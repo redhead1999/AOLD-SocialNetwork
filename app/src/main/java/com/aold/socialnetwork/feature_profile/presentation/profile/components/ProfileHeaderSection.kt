@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.navOptions
 import com.aold.socialnetwork.core.domain.models.User
 import com.aold.socialnetwork.presentation.ui.theme.SpaceLarge
 import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium
@@ -25,7 +27,7 @@ fun ProfileHeaderSection(
     user: User,
     modifier: Modifier = Modifier,
     isOwnProfile: Boolean = true,
-    onEditClick: () -> Unit = {}
+    onEditClick: () -> Unit = {},
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -53,7 +55,7 @@ fun ProfileHeaderSection(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Edit,
-                        contentDescription = stringResource(id = R.string.edit)
+                        contentDescription = stringResource(id = R.string.edit),
                     )
                 }
             }

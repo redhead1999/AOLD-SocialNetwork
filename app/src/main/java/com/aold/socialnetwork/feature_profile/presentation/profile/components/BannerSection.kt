@@ -4,7 +4,10 @@ import com.aold.socialnetwork.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,7 +31,8 @@ fun BannerSection(
     rightIconModifier: Modifier = Modifier,
     onGitHubClick: () -> Unit = {},
     onInstagramClick: () -> Unit = {},
-    onLinkedInClick: () -> Unit = {}
+    onLinkedInClick: () -> Unit = {},
+    onExitClick: () -> Unit = {}
 ) {
     BoxWithConstraints(modifier = modifier) {
         Image(
@@ -106,6 +110,15 @@ fun BannerSection(
                     painter = painterResource(id = R.drawable.ic_linkedin_icon_1),
                     contentDescription = "LinkedIn",
                     modifier = Modifier.size(iconSize)
+                )
+            }
+            IconButton(
+                onClick = onExitClick,
+                modifier = Modifier.size(iconSize)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ExitToApp,
+                    contentDescription = stringResource(id = R.string.logout)
                 )
             }
         }
