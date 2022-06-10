@@ -13,6 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.aold.socialnetwork.core.domain.models.Activity
 import com.aold.socialnetwork.core.presentation.components.StandardToolbar
 import com.aold.socialnetwork.core.util.DateFormatUtil
+import com.aold.socialnetwork.core.util.Screen
 import com.aold.socialnetwork.feature_activity.components.ActivityItem
 import com.aold.socialnetwork.feature_activity.domain.ActivityAction
 import com.aold.socialnetwork.presentation.ui.theme.SpaceExtraLarge
@@ -56,12 +57,15 @@ fun ActivityScreen(
                             timestamp = System.currentTimeMillis(),
                             pattern = "dd MMM, HH:mm"
                         )
-                    )
+                    ),
+                    onActivityClick = {
+                        onNavigate(Screen.MainFeedScreen.route)
+                    }
                 )
                 if (it < 19) Spacer(modifier = Modifier.height(SpaceMedium))
             }
             item {
-                Spacer(modifier =Modifier.height(SpaceExtraLarge))
+                Spacer(modifier = Modifier.height(SpaceExtraLarge))
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.aold.socialnetwork.feature_activity.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
@@ -35,12 +36,15 @@ import com.aold.socialnetwork.presentation.ui.theme.SpaceSmall
 fun ActivityItem(
     activity: Activity,
     modifier: Modifier = Modifier,
+    onActivityClick: () -> Unit = {},
 ) {
     Card(
         shape = MaterialTheme.shapes.medium,
         backgroundColor = MaterialTheme.colors.onSurface,
         elevation = 20.dp,
-        modifier = Modifier.padding(horizontal = SpaceExtraSmall)
+        modifier = Modifier
+            .padding(horizontal = SpaceExtraSmall)
+            .clickable { onActivityClick() }
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

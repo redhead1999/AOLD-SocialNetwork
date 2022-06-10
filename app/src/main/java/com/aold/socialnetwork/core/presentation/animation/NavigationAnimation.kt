@@ -23,7 +23,7 @@ fun NavAnimation(
 
     AnimatedNavHost(
         navController = navController,
-        startDestination = "main_feed_screen"
+        startDestination = "splash_screen"
     ) {
         composable(
             "main_feed_screen",
