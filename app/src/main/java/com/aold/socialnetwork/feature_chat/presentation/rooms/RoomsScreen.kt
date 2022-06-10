@@ -46,7 +46,7 @@ fun RoomsScreen(
             },
             navActions = {
                 IconButton(onClick = {
-                    navController.navigate(Screen.SearchScreen.route)
+                    navController.navigate(Screen.SearchChatScreen.route)
                 }) {
                     Icon(
                         imageVector = Icons.Default.Search,

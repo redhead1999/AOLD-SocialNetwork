@@ -29,7 +29,7 @@
     <string name="your_chat">Мессенджер</string>
     <string name="liked">понравился</string>
     <string name="commented_on">прокомментировал</string>
-    <string name="your_post">твой пост</string>
+    <string name="your_post">Твой пост</string>
     <string name="your_activity">Уведомления</string>
     <string name="your_profile">Твой профиль</string>
     <string name="banner_image">Банер</string>
@@ -48,6 +48,7 @@
     <string name="select_top_3_skills">Выбери свои ТОП-3 скилла:</string>
     <string name="save_changes">Сохранить изменения</string>
     <string name="search_for_users">Найти пользователя</string>
+    <string name="search_for_сhat_users">Найти собеседника</string>
     <string name="search">Поиск...</string>
     <string name="create_a_new_post">Новый пост</string>
     <string name="create_post">Создать пост</string>

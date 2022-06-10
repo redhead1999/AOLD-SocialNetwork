@@ -1,4 +1,4 @@
-package com.aold.socialnetwork.feature_profile.search
+package com.aold.socialnetwork.feature_chat.presentation.chat_search
 
 import androidx.compose.foundation.clickable
 import com.aold.socialnetwork.R
@@ -9,6 +9,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Message
 import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
@@ -26,25 +27,26 @@ import com.aold.socialnetwork.feature_profile.presentation.profile.components.Us
 import com.aold.socialnetwork.presentation.ui.theme.IconSizeMedium
 import com.aold.socialnetwork.presentation.ui.theme.SpaceLarge
 import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium
+import kotlinx.coroutines.flow.collectLatest
 
 @ExperimentalMaterialApi
 @Composable
-fun SearchScreen(
+fun SearchСhatScreen(
     navController: NavController,
     onNavigate: (String) -> Unit = {},
     onNavigateUp: () -> Unit = {},
-    onProfileClick: () -> Unit = {},
-    viewModel: SearchViewModel = hiltViewModel(),
+    viewModel: SearchChatViewModel = hiltViewModel(),
 ) {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize(),
     ) {
         StandardToolbar(
             onNavigateUp = onNavigateUp,
             showBackArrow = true,
             title = {
                 Text(
-                    text = stringResource(id = R.string.search_for_users),
+                    text = stringResource(id = R.string.search_for_сhat_users),
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colors.onBackground
                 )
@@ -55,7 +57,6 @@ fun SearchScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(SpaceLarge)
-                .clickable { onProfileClick() }
         ) {
             StandardTextField(
                 modifier = Modifier.fillMaxWidth(),
@@ -71,29 +72,37 @@ fun SearchScreen(
             )
 
             Spacer(modifier = Modifier.height(SpaceLarge))
+
+            LaunchedEffect(key1 = true) {
+                viewModel.onJoinChat.collectLatest { room ->
+                    onNavigate("chat_screen/$room")
+                }
+            }
+
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
             ) {
                 items(10) {
-                    UserProfileItem(
+                    SearchRoomItem(
                         user = User(
                             profilePictureUrl = "",
                             username = "Юрий Кирилин",
-                            description = "Some Random Text Here",
+                            description = "Я найду тебя",
                             followerCount = 702,
                             followingCount = 410,
                             postCount = 4
                         ),
+
                         actionIcon = {
                             Icon(
-                                imageVector = Icons.Default.PersonAdd,
+                                imageVector = Icons.Default.Message,
                                 contentDescription = null,
                                 tint = MaterialTheme.colors.onBackground,
                                 modifier = Modifier.size(IconSizeMedium)
                             )
                         },
-                        onProfileClick = {
-                            onNavigate(Screen.ProfileScreen.route)
+                        onRoomClick = {
+                            onNavigate(Screen.ChatScreen.route)
                         }
                     )
                     Spacer(modifier = Modifier.height(SpaceMedium))
