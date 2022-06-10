@@ -1,6 +1,7 @@
-package com.aold.socialnetwork.feature_profile.presentation.profile.components
+package com.aold.socialnetwork.feature_chat.presentation.chat_search
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -10,31 +11,35 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.aold.socialnetwork.R
+import com.aold.socialnetwork.core.domain.models.Activity
 import com.aold.socialnetwork.core.domain.models.User
-import com.aold.socialnetwork.presentation.ui.theme.IconSizeMedium
-import com.aold.socialnetwork.presentation.ui.theme.ProfilePictureSizeSmall
-import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium
-import com.aold.socialnetwork.presentation.ui.theme.SpaceSmall
+import com.aold.socialnetwork.feature_activity.domain.ActivityAction
+import com.aold.socialnetwork.presentation.ui.theme.*
 
 @ExperimentalMaterialApi
 @Composable
-fun UserProfileItem(
+fun SearchRoomItem(
     user: User,
-    modifier: Modifier = Modifier,
     actionIcon: @Composable () -> Unit = {},
-    onItemClick: () -> Unit = {},
-    onActionItemClick: () -> Unit = {},
-    onProfileClick: () -> Unit = {},
+    onRoomClick: () -> Unit = {},
 
     ) {
     Card(
-        modifier = modifier,
+        modifier = Modifier
+            .padding(horizontal = SpaceExtraSmall)
+            .clickable { onRoomClick() },
         shape = MaterialTheme.shapes.medium,
-        onClick = onItemClick,
+        onClick = onRoomClick,
         elevation = 5.dp
     ) {
         Row(
@@ -76,7 +81,7 @@ fun UserProfileItem(
                 )
             }
             IconButton(
-                onClick = onProfileClick,
+                onClick = onRoomClick,
                 modifier = Modifier.size(IconSizeMedium)
             ) { actionIcon() }
         }
