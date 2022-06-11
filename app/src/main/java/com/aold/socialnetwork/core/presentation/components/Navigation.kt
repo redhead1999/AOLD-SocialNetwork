@@ -20,7 +20,6 @@ import com.aold.socialnetwork.feature_auth.presentation.register.RegisterScreen
 import com.aold.socialnetwork.feature_auth.presentation.splash.SplashScreen
 import com.aold.socialnetwork.feature_chat.presentation.chat.ChatScreen
 import com.aold.socialnetwork.feature_chat.presentation.chat_search.SearchСhatScreen
-import com.aold.socialnetwork.feature_chat.presentation.rooms.RoomsScreen
 import com.aold.socialnetwork.feature_post.presentation.create_post.CreatePostScreen
 import com.aold.socialnetwork.feature_profile.presentation.edit_profile.EditProfileScreen
 import com.aold.socialnetwork.feature_profile.presentation.profile.ProfileScreen
@@ -77,13 +76,6 @@ fun Navigation(
                 imageLoader = imageLoader
             )
         }
-        composable(Screen.RoomsScreen.route) {
-            RoomsScreen(
-                navController = navController,
-                onNavigateUp = navController::navigateUp,
-                onNavigate = navController::navigate,
-            )
-        }
         composable(Screen.SearchChatScreen.route) {
             SearchСhatScreen(
                 navController = navController,
@@ -93,9 +85,9 @@ fun Navigation(
         }
         composable(Screen.ChatScreen.route) {
             ChatScreen(
-                navController = navController,
                 onNavigateUp = navController::navigateUp,
-                username = "username",
+                onNavigate = navController::navigate,
+                imageLoader = imageLoader
             )
         }
         composable(Screen.ActivityScreen.route) {
