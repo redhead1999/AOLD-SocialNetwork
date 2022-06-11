@@ -15,14 +15,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import javax.inject.Singleton
 
-
 @ExperimentalCoroutinesApi
 @Module
 @InstallIn(SingletonComponent::class)
 object ChatModule {
 
     @Provides
-    @Singleton
     fun provideChatUseCases(repository: ChatRepository): ChatUseCases {
         return ChatUseCases(
             sendMessage = SendMessage(repository),

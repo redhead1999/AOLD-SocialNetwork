@@ -2,97 +2,52 @@ package com.aold.socialnetwork.feature_chat.presentation.chat
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aold.socialnetwork.feature_chat.data.remote.ChatSocketService
-import com.aold.socialnetwork.feature_chat.data.remote.MessageService
-import com.aold.socialnetwork.feature_chat.util.Resource
+import com.aold.socialnetwork.core.util.Resource
 import com.aold.socialnetwork.core.util.UiEvent
+import com.aold.socialnetwork.core.util.UiText
+import com.aold.socialnetwork.feature_chat.domain.use_case.ChatUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
 class ChatViewModel @Inject constructor(
-    private val messageService: MessageService,
-    private val chatSocketService: ChatSocketService,
-    private val savedStateHandle: SavedStateHandle
+    private val chatUseCases: ChatUseCases,
 ) : ViewModel() {
-
-    private val _messageText = mutableStateOf("")
-    val messageText: State<String> = _messageText
 
     private val _state = mutableStateOf(ChatState())
     val state: State<ChatState> = _state
 
-    private val _toastEvent = MutableSharedFlow<String>()
-    val toastEvent = _toastEvent.asSharedFlow()
-
     private val _eventFlow = MutableSharedFlow<UiEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
-    fun connectToChat() {
-        getAllMessages()
-        savedStateHandle.get<String>("username")?.let { username ->
-            viewModelScope.launch {
-                val result = chatSocketService.initSession(username)
-                when(result) {
-                    is Resource.Success -> {
-                        chatSocketService.observeMessages()
-                            .onEach { message ->
-                                val newList = state.value.messages.toMutableList().apply {
-                                    add(0, message)
-                                }
-                                _state.value = state.value.copy(
-                                    messages = newList
-                                )
-                            }.launchIn(viewModelScope)
-                    }
-                    is Resource.Error -> {
-                        _toastEvent.emit(result.message ?: "Неизвестная ошибка")
-                    }
+    init {
+        loadChats()
+    }
+
+    private fun loadChats() {
+        viewModelScope.launch {
+            _state.value = state.value.copy(isLoading = true)
+            val result = chatUseCases.getChatsForUser()
+            when(result) {
+                is Resource.Success -> {
+                    _state.value = state.value.copy(
+                        chats = result.data ?: emptyList(),
+                        isLoading = false
+                    )
+                }
+                is Resource.Error -> {
+                    _eventFlow.emit(UiEvent.ShowSnackBar(
+                        result.uiText ?: UiText.unknownError()
+                    ))
+                    _state.value = state.value.copy(isLoading = false)
                 }
             }
         }
-    }
-
-    fun onMessageChange(message: String) {
-        _messageText.value = message
-    }
-
-    fun disconnect() {
-        viewModelScope.launch {
-            chatSocketService.closeSession()
-        }
-    }
-
-    fun getAllMessages() {
-        viewModelScope.launch {
-            _state.value = state.value.copy(isLoading = true)
-            val result = messageService.getAllMessages()
-            _state.value = state.value.copy(
-                messages = result,
-                isLoading = false
-            )
-        }
-    }
-
-    fun sendMessage() {
-        viewModelScope.launch {
-            if(messageText.value.isNotBlank()) {
-                chatSocketService.sendMessage(messageText.value)
-            }
-        }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        disconnect()
     }
 }

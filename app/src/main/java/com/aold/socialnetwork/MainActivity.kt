@@ -1,6 +1,7 @@
 package com.aold.socialnetwork
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.AnimatedContentScope
@@ -12,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -30,22 +32,20 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 import javax.inject.Inject
 
-@DelicateCoroutinesApi
-@ExperimentalCoilApi
 @ExperimentalComposeUiApi
+@ExperimentalCoilApi
 @ExperimentalMaterialApi
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
     @Inject
-    lateinit var imageLoader: coil.ImageLoader
+    lateinit var imageLoader: ImageLoader
 
-    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             SocialNetworkTheme {
-
                 Surface(
                     color = MaterialTheme.colors.background,
                     modifier = Modifier.fillMaxSize()
@@ -56,12 +56,7 @@ class MainActivity : AppCompatActivity() {
 
                     StandardScaffold(
                         navController = navController,
-                        showBottomBar = navBackStackEntry?.destination?.route in listOf(
-                            Screen.MainFeedScreen.route,
-                            Screen.ChatScreen.route,
-                            Screen.ActivityScreen.route,
-                            Screen.ProfileScreen.route,
-                        ),
+                        showBottomBar = shouldShowBottomBar(navBackStackEntry),
                         state = scaffoldState,
                         modifier = Modifier.fillMaxSize(),
                         onFabClick = {
@@ -73,5 +68,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun shouldShowBottomBar(backStackEntry: NavBackStackEntry?): Boolean {
+        val doesRouteMatch = backStackEntry?.destination?.route in listOf(
+            Screen.MainFeedScreen.route,
+            Screen.ChatScreen.route,
+            Screen.ActivityScreen.route
+        )
+        val isOwnProfile = backStackEntry?.destination?.route == "${Screen.ProfileScreen.route}?userId={userId}" &&
+                backStackEntry.arguments?.getString("userId") == null
+        return doesRouteMatch || isOwnProfile
     }
 }
