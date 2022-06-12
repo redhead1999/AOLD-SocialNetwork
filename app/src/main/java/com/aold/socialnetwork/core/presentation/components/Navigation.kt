@@ -111,7 +111,8 @@ fun Navigation(
         ) {
             val remoteUserId = it.arguments?.getString("remoteUserId")!!
             val remoteUsername = it.arguments?.getString("remoteUsername")!!
-            val remoteUserProfilePictureUrl = it.arguments?.getString("remoteUserProfilePictureUrl")!!
+            val remoteUserProfilePictureUrl =
+                it.arguments?.getString("remoteUserProfilePictureUrl")!!
             MessageScreen(
                 remoteUserId = remoteUserId,
                 remoteUsername = remoteUsername,
@@ -127,13 +128,41 @@ fun Navigation(
                 onNavigate = navController::navigate,
             )
         }
-        composable(Screen.ProfileScreen.route) {
-            ProfileScreen(navController = navController)
-        }
-        composable(Screen.EditProfileScreen.route) {
+        composable(
+            route = Screen.ProfileScreen.route + "?userId={userId}",
+            arguments = listOf(
+                navArgument(name = "userId") {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                }
+            )
+        )
+        //fixMe kuroro
+//        ) {
+//            ProfileScreen(
+//                userId = it.arguments?.getString("userId"),
+//                onLogout = {
+//                    navController.navigate(route = Screen.LoginScreen.route)
+//                },
+//                onNavigate = navController::navigate,
+//                scaffoldState = scaffoldState,
+//                imageLoader = imageLoader
+//            )
+//        }
+        composable(
+            Screen.EditProfileScreen.route + "/{userId}",
+            arguments = listOf(
+                navArgument(name = "userId") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
             EditProfileScreen(
-                navController = navController,
                 onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate,
+                scaffoldState = scaffoldState,
+                imageLoader = imageLoader
             )
         }
         composable(Screen.CreatePostScreen.route) {
@@ -146,8 +175,9 @@ fun Navigation(
         }
         composable(Screen.SearchScreen.route) {
             SearchScreen(
-                navController = navController,
                 onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate,
+                imageLoader = imageLoader
             )
         }
         composable(Screen.PersonListScreen.route) {

@@ -2,7 +2,6 @@ package com.aold.socialnetwork.feature_auth.presentation.register
 
 import com.aold.socialnetwork.R
 
-
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*

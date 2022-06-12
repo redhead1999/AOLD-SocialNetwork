@@ -1,3 +1,3 @@
-package dev.amal.socialnetwork.core.util
+package com.aold.socialnetwork.core.util
 
 abstract class Error
