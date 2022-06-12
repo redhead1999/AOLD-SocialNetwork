@@ -8,8 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import com.aold.socialnetwork.core.domain.models.Post
@@ -20,7 +22,7 @@ import com.aold.socialnetwork.feature_auth.presentation.register.RegisterScreen
 import com.aold.socialnetwork.feature_auth.presentation.splash.SplashScreen
 import com.aold.socialnetwork.feature_chat.presentation.chat.ChatScreen
 import com.aold.socialnetwork.feature_chat.presentation.chat_search.SearchСhatScreen
-import com.aold.socialnetwork.feature_chat.presentation.rooms.RoomsScreen
+import com.aold.socialnetwork.feature_chat.presentation.message.MessageScreen
 import com.aold.socialnetwork.feature_post.presentation.create_post.CreatePostScreen
 import com.aold.socialnetwork.feature_profile.presentation.edit_profile.EditProfileScreen
 import com.aold.socialnetwork.feature_profile.presentation.profile.ProfileScreen
@@ -30,10 +32,8 @@ import com.aold.socialnetwork.feature_post.presentation.person_list.PersonListSc
 import com.aold.socialnetwork.feature_post.presentation.post_detail.PostDetailScreen
 import kotlinx.coroutines.DelicateCoroutinesApi
 
-@OptIn(ExperimentalAnimationApi::class)
-@ExperimentalCoilApi
-@DelicateCoroutinesApi
 @ExperimentalComposeUiApi
+@ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
 fun Navigation(
@@ -77,13 +77,6 @@ fun Navigation(
                 imageLoader = imageLoader
             )
         }
-        composable(Screen.RoomsScreen.route) {
-            RoomsScreen(
-                navController = navController,
-                onNavigateUp = navController::navigateUp,
-                onNavigate = navController::navigate,
-            )
-        }
         composable(Screen.SearchChatScreen.route) {
             SearchСhatScreen(
                 navController = navController,
@@ -93,9 +86,39 @@ fun Navigation(
         }
         composable(Screen.ChatScreen.route) {
             ChatScreen(
-                navController = navController,
                 onNavigateUp = navController::navigateUp,
-                username = "username",
+                onNavigate = navController::navigate,
+                imageLoader = imageLoader
+            )
+        }
+        composable(
+            route = Screen.MessagesScreen.route + "/{remoteUserId}/{remoteUsername}/{remoteUserProfilePictureUrl}?chatId={chatId}",
+            arguments = listOf(
+                navArgument("chatId") {
+                    type = NavType.StringType
+                    nullable = true
+                },
+                navArgument("remoteUserId") {
+                    type = NavType.StringType
+                },
+                navArgument("remoteUsername") {
+                    type = NavType.StringType
+                },
+                navArgument("remoteUserProfilePictureUrl") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
+            val remoteUserId = it.arguments?.getString("remoteUserId")!!
+            val remoteUsername = it.arguments?.getString("remoteUsername")!!
+            val remoteUserProfilePictureUrl = it.arguments?.getString("remoteUserProfilePictureUrl")!!
+            MessageScreen(
+                remoteUserId = remoteUserId,
+                remoteUsername = remoteUsername,
+                encodedRemoteUserProfilePictureUrl = remoteUserProfilePictureUrl,
+                onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate,
+                imageLoader = imageLoader
             )
         }
         composable(Screen.ActivityScreen.route) {

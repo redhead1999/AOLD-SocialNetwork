@@ -4,14 +4,12 @@ import com.aold.socialnetwork.feature_chat.domain.models.Message
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-data class MessageDto(
+data class WsServerMessage(
     val fromId: String,
     val toId: String,
     val text: String,
     val timestamp: Long,
     val chatId: String?,
-    val id: String
 ) {
     fun toMessage(): Message {
         return Message(
