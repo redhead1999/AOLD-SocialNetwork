@@ -27,90 +27,92 @@ import com.aold.socialnetwork.presentation.ui.theme.IconSizeMedium
 import com.aold.socialnetwork.presentation.ui.theme.SpaceLarge
 import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium
 
-@ExperimentalCoilApi
-@ExperimentalMaterialApi
-@Composable
-fun SearchScreen(
-    imageLoader: ImageLoader,
-    onNavigate: (String) -> Unit = {},
-    onNavigateUp: () -> Unit = {},
-    viewModel: SearchViewModel = hiltViewModel()
-) {
-    val state = viewModel.searchState.value
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Column(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            StandardToolbar(
-                onNavigateUp = onNavigateUp,
-                showBackArrow = true,
-                title = {
-                    Text(
-                        text = stringResource(id = R.string.search_for_users),
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colors.onBackground
-                    )
-                }
-            )
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(SpaceLarge)
-            ) {
-                StandardTextField(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    text = viewModel.searchFieldState.value.text,
-                    hint = stringResource(id = R.string.search),
-                    error = "",
-                    leadingIcon = Icons.Default.Search,
-                    onValueChange = {
-                        viewModel.onEvent(SearchEvent.Query(it))
-                    }
-                )
-                Spacer(modifier = Modifier.height(SpaceLarge))
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    items(state.userItems) { user ->
-                        UserProfileItem(
-                            user = user,
-                            imageLoader = imageLoader,
-                            actionIcon = {
-                                IconButton(
-                                    onClick = {
-                                        viewModel.onEvent(SearchEvent.ToggleFollowState(user.userId))
-                                    },
-                                    modifier = Modifier
-                                        .size(IconSizeMedium)
-                                ) {
-                                    Icon(
-                                        imageVector = if (user.isFollowing) {
-                                            Icons.Default.PersonRemove
-                                        } else Icons.Default.PersonAdd,
-                                        contentDescription = null,
-                                        tint = MaterialTheme.colors.onBackground,
-                                    )
-                                }
-                            },
-                            onItemClick = {
-                                onNavigate(
-                                    Screen.ProfileScreen.route + "?userId=${user.userId}"
-                                )
-                            }
-                        )
-                        Spacer(modifier = Modifier.height(SpaceMedium))
-                    }
-                }
-            }
-        }
-        if (state.isLoading) {
-            CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
-    }
 
-}
+//fixMe kuroro
+//@ExperimentalCoilApi
+//@ExperimentalMaterialApi
+//@Composable
+//fun SearchScreen(
+//    imageLoader: ImageLoader,
+//    onNavigate: (String) -> Unit = {},
+//    onNavigateUp: () -> Unit = {},
+//    viewModel: SearchViewModel = hiltViewModel()
+//) {
+//    val state = viewModel.searchState.value
+//    Box(
+//        modifier = Modifier.fillMaxSize()
+//    ) {
+//        Column(
+//            modifier = Modifier.fillMaxSize()
+//        ) {
+//            StandardToolbar(
+//                onNavigateUp = onNavigateUp,
+//                showBackArrow = true,
+//                title = {
+//                    Text(
+//                        text = stringResource(id = R.string.search_for_users),
+//                        fontWeight = FontWeight.Bold,
+//                        color = MaterialTheme.colors.onBackground
+//                    )
+//                }
+//            )
+//            Column(
+//                modifier = Modifier
+//                    .fillMaxSize()
+//                    .padding(SpaceLarge)
+//            ) {
+//                StandardTextField(
+//                    modifier = Modifier
+//                        .fillMaxWidth(),
+//                    text = viewModel.searchFieldState.value.text,
+//                    hint = stringResource(id = R.string.search),
+//                    error = "",
+//                    leadingIcon = Icons.Default.Search,
+//                    onValueChange = {
+//                        viewModel.onEvent(SearchEvent.Query(it))
+//                    }
+//                )
+//                Spacer(modifier = Modifier.height(SpaceLarge))
+//                LazyColumn(
+//                    modifier = Modifier.fillMaxSize()
+//                ) {
+//                    items(state.userItems) { user ->
+//                        UserProfileItem(
+//                            user = user,
+//                            imageLoader = imageLoader,
+//                            actionIcon = {
+//                                IconButton(
+//                                    onClick = {
+//                                        viewModel.onEvent(SearchEvent.ToggleFollowState(user.userId))
+//                                    },
+//                                    modifier = Modifier
+//                                        .size(IconSizeMedium)
+//                                ) {
+//                                    Icon(
+//                                        imageVector = if (user.isFollowing) {
+//                                            Icons.Default.PersonRemove
+//                                        } else Icons.Default.PersonAdd,
+//                                        contentDescription = null,
+//                                        tint = MaterialTheme.colors.onBackground,
+//                                    )
+//                                }
+//                            },
+//                            onItemClick = {
+//                                onNavigate(
+//                                    Screen.ProfileScreen.route + "?userId=${user.userId}"
+//                                )
+//                            }
+//                        )
+//                        Spacer(modifier = Modifier.height(SpaceMedium))
+//                    }
+//                }
+//            }
+//        }
+//        if (state.isLoading) {
+//            CircularProgressIndicator(
+//                modifier = Modifier.align(Alignment.Center)
+//            )
+//        }
+//    }
+//
+//}
