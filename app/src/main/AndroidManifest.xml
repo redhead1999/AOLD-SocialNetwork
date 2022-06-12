@@ -15,7 +15,7 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.SocialNetwork">
         <activity
-            android:name="com.aold.socialnetwork.MainActivity"
+            android:name="com.aold.socialnetwork.core.presentation.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.SocialNetwork.NoActionBar">
             <intent-filter>

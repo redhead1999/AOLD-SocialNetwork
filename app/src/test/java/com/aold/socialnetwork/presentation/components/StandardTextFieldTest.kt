@@ -11,7 +11,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.aold.socialnetwork.MainActivity
+import com.aold.socialnetwork.core.presentation.MainActivity
 import com.aold.socialnetwork.core.presentation.components.StandardTextField
 import com.aold.socialnetwork.core.util.TestTags.STANDARD_TEXT_FIELD
 import org.junit.Rule

@@ -4,7 +4,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.navigation.NavController
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.aold.socialnetwork.MainActivity
+import com.aold.socialnetwork.core.presentation.MainActivity
 import com.aold.socialnetwork.core.util.Constants
 import com.aold.socialnetwork.core.util.Screen
 import com.aold.socialnetwork.feature_auth.presentation.splash.SplashScreen
