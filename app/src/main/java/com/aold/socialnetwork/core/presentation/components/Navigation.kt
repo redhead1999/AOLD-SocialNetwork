@@ -157,18 +157,19 @@ fun Navigation(
                 imageLoader = imageLoader
             )
         }
-        composable(Screen.PostDetailScreen.route) {
-            PostDetailScreen(
-                navController = navController,
-                post = Post(
-                    username = "Just_Amalll",
-                    imageUrl = "",
-                    profilePictureUrl = "",
-                    description = "Some Random Text Here",
-                    likeCount = 17,
-                    commentCount = 7
-                )
-            )
-        }
+        //fixMe kuroro
+//        composable(Screen.PostDetailScreen.route) {
+//            PostDetailScreen(
+//                navController = navController,
+//                post = Post(
+//                    username = "Just_Amalll",
+//                    imageUrl = "",
+//                    profilePictureUrl = "",
+//                    description = "Some Random Text Here",
+//                    likeCount = 17,
+//                    commentCount = 7
+//                )
+//            )
+//        }
     }
 }

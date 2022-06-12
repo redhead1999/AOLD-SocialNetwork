@@ -1,6 +1,5 @@
 package com.aold.socialnetwork.feature_chat.presentation.chat_search
 
-import androidx.compose.foundation.clickable
 import com.aold.socialnetwork.R
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,7 +9,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Message
-import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -23,7 +21,6 @@ import com.aold.socialnetwork.core.domain.states.StandardTextFieldState
 import com.aold.socialnetwork.core.presentation.components.StandardTextField
 import com.aold.socialnetwork.core.presentation.components.StandardToolbar
 import com.aold.socialnetwork.core.util.Screen
-import com.aold.socialnetwork.feature_profile.presentation.profile.components.UserProfileItem
 import com.aold.socialnetwork.presentation.ui.theme.IconSizeMedium
 import com.aold.socialnetwork.presentation.ui.theme.SpaceLarge
 import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium
