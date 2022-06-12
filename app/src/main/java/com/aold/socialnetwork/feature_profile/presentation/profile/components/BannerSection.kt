@@ -4,10 +4,7 @@ import com.aold.socialnetwork.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,35 +15,53 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium
+import coil.ImageLoader
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
 import com.aold.socialnetwork.presentation.ui.theme.SpaceSmall
 import com.aold.socialnetwork.core.util.toPx
+import com.aold.socialnetwork.feature_profile.domain.model.Skill
 
+@ExperimentalCoilApi
 @Composable
 fun BannerSection(
+    imageLoader: ImageLoader,
     modifier: Modifier = Modifier,
     imageModifier: Modifier = Modifier,
     iconSize: Dp = 35.dp,
     leftIconModifier: Modifier = Modifier,
     rightIconModifier: Modifier = Modifier,
+    bannerUrl: String? = null,
+    topSkills: List<Skill> = emptyList(),
+    shouldShowGitHub: Boolean = false,
+    shouldShowInstagram: Boolean = false,
+    shouldShowLinkedIn: Boolean = false,
     onGitHubClick: () -> Unit = {},
     onInstagramClick: () -> Unit = {},
-    onLinkedInClick: () -> Unit = {},
-    onExitClick: () -> Unit = {}
+    onLinkedInClick: () -> Unit = {}
 ) {
-    BoxWithConstraints(modifier = modifier) {
+    BoxWithConstraints(
+        modifier = modifier
+    ) {
         Image(
-            painter = painterResource(id = R.drawable.channelart),
+            painter = rememberImagePainter(
+                data = bannerUrl,
+                imageLoader = imageLoader
+            ),
             contentDescription = stringResource(id = R.string.banner_image),
             contentScale = ContentScale.Crop,
-            modifier = imageModifier.fillMaxSize()
+            modifier = imageModifier
+                .fillMaxSize()
         )
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(
                     brush = Brush.verticalGradient(
-                        colors = listOf(Color.Transparent, Color.Black),
+                        colors = listOf(
+                            Color.Transparent,
+                            Color.Black
+                        ),
                         startY = constraints.maxHeight - iconSize.toPx() * 2f
                     )
                 )
@@ -57,69 +72,60 @@ fun BannerSection(
                 .align(Alignment.BottomStart)
                 .padding(SpaceSmall)
         ) {
-            Spacer(modifier = Modifier.width(SpaceSmall))
-            Image(
-                painter = painterResource(id = R.drawable.ic_js_logo),
-                contentDescription = "Javascript",
-                modifier = Modifier.height(iconSize)
-            )
-            Spacer(modifier = Modifier.width(SpaceMedium))
-            Image(
-                painter = painterResource(id = R.drawable.ic_csharp_logo),
-                contentDescription = "C#",
-                modifier = Modifier.height(iconSize)
-            )
-            Spacer(modifier = Modifier.width(SpaceMedium))
-            Image(
-                painter = painterResource(id = R.drawable.ic_kotlin_logo),
-                contentDescription = "Kotlin",
-                modifier = Modifier.height(iconSize)
-            )
+            topSkills.forEach { skill ->
+                Spacer(modifier = Modifier.width(SpaceSmall))
+                Image(
+                    painter = rememberImagePainter(
+                        data = skill.imageUrl,
+                        imageLoader = imageLoader,
+                    ),
+                    contentDescription = null,
+                    modifier = Modifier.height(iconSize)
+                )
+            }
         }
+
         Row(
             modifier = rightIconModifier
                 .height(iconSize)
                 .align(Alignment.BottomEnd)
                 .padding(SpaceSmall)
         ) {
-            IconButton(
-                onClick = onGitHubClick,
-                modifier = Modifier.size(iconSize)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_github_icon_1),
-                    contentDescription = "GitHub",
+            if (shouldShowGitHub) {
+                IconButton(
+                    onClick = onGitHubClick,
                     modifier = Modifier.size(iconSize)
-                )
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_github_icon_1),
+                        contentDescription = "GitHub",
+                        modifier = Modifier.size(iconSize)
+                    )
+                }
             }
-            IconButton(
-                onClick = onInstagramClick,
-                modifier = Modifier.size(iconSize)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_instagram_glyph_1),
-                    contentDescription = "Instagram",
+            if (shouldShowInstagram) {
+                IconButton(
+                    onClick = onInstagramClick,
                     modifier = Modifier.size(iconSize)
-                )
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_instagram_glyph_1),
+                        contentDescription = "Instagram",
+                        modifier = Modifier.size(iconSize)
+                    )
+                }
             }
-            IconButton(
-                onClick = onLinkedInClick,
-                modifier = Modifier.size(iconSize)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_linkedin_icon_1),
-                    contentDescription = "LinkedIn",
+            if (shouldShowLinkedIn) {
+                IconButton(
+                    onClick = onLinkedInClick,
                     modifier = Modifier.size(iconSize)
-                )
-            }
-            IconButton(
-                onClick = onExitClick,
-                modifier = Modifier.size(iconSize)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.ExitToApp,
-                    contentDescription = stringResource(id = R.string.logout)
-                )
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_linkedin_icon_1),
+                        contentDescription = "LinkedIn",
+                        modifier = Modifier.size(iconSize)
+                    )
+                }
             }
         }
     }

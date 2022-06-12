@@ -8,29 +8,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.aold.socialnetwork.R
-import com.aold.socialnetwork.core.domain.models.User
+import coil.ImageLoader
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
+import com.aold.socialnetwork.core.domain.models.UserItem
 import com.aold.socialnetwork.presentation.ui.theme.IconSizeMedium
 import com.aold.socialnetwork.presentation.ui.theme.ProfilePictureSizeSmall
 import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium
 import com.aold.socialnetwork.presentation.ui.theme.SpaceSmall
 
+@ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
 fun UserProfileItem(
-    user: User,
+    user: UserItem,
+    imageLoader: ImageLoader,
     modifier: Modifier = Modifier,
     actionIcon: @Composable () -> Unit = {},
     onItemClick: () -> Unit = {},
     onActionItemClick: () -> Unit = {},
-    onProfileClick: () -> Unit = {},
-
-    ) {
+    ownUserId: String = ""
+) {
     Card(
         modifier = modifier,
         shape = MaterialTheme.shapes.medium,
@@ -48,9 +49,11 @@ fun UserProfileItem(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Image(
-                painter = painterResource(id = R.drawable.philipp),
+                painter = rememberImagePainter(
+                    data = user.profilePictureUrl,
+                    imageLoader = imageLoader
+                ),
                 contentDescription = null,
-                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(ProfilePictureSizeSmall)
                     .clip(CircleShape)
@@ -58,8 +61,8 @@ fun UserProfileItem(
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .fillMaxWidth(0.8f)
                     .padding(horizontal = SpaceSmall)
+                    .weight(1f)
             ) {
                 Text(
                     text = user.username,
@@ -69,16 +72,23 @@ fun UserProfileItem(
                 )
                 Spacer(modifier = Modifier.height(SpaceSmall))
                 Text(
-                    text = user.description,
+                    text = user.bio,
                     style = MaterialTheme.typography.body2,
                     overflow = TextOverflow.Ellipsis,
-                    maxLines = 2
+                    maxLines = 2,
+                    modifier = Modifier.heightIn(
+                        min = MaterialTheme.typography.body2.fontSize.value.dp * 3f
+                    )
                 )
             }
-            IconButton(
-                onClick = onProfileClick,
-                modifier = Modifier.size(IconSizeMedium)
-            ) { actionIcon() }
+            if(user.userId != ownUserId) {
+                IconButton(
+                    onClick = onActionItemClick,
+                    modifier = Modifier.size(IconSizeMedium)
+                ) {
+                    actionIcon()
+                }
+            }
         }
     }
 }
