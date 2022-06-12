@@ -1,6 +1,5 @@
 package com.aold.socialnetwork.feature_profile.presentation.edit_profile
 
-import androidx.activity.compose.BackHandler
 import com.aold.socialnetwork.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -13,7 +12,6 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.Person
