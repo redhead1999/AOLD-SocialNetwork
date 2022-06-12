@@ -10,7 +10,7 @@ import com.aold.socialnetwork.core.domain.use_case.ToggleFollowStateForUserUseCa
 import com.aold.socialnetwork.core.util.Resource
 import com.aold.socialnetwork.core.util.UiEvent
 import com.aold.socialnetwork.core.util.UiText
-import com.plcoding.socialnetworktwitch.feature_post.domain.use_case.PostUseCases
+import com.aold.socialnetwork.feature_post.use_case.PostUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow

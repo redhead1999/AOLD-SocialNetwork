@@ -1,8 +1,8 @@
-package com.plcoding.socialnetworktwitch.feature_post.domain.use_case
+package com.aold.socialnetwork.feature_post.use_case
 
-import com.plcoding.socialnetworktwitch.core.domain.models.UserItem
-import com.plcoding.socialnetworktwitch.core.util.Resource
-import com.plcoding.socialnetworktwitch.feature_post.domain.repository.PostRepository
+import com.aold.socialnetwork.core.domain.models.UserItem
+import com.aold.socialnetwork.core.util.Resource
+import com.aold.socialnetwork.feature_post.domain.repository.PostRepository
 
 class GetLikesForParentUseCase(
     private val repository: PostRepository
