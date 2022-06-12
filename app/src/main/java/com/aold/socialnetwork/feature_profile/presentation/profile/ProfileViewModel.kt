@@ -10,7 +10,7 @@ import com.aold.socialnetwork.core.domain.models.Post
 import com.aold.socialnetwork.core.domain.use_case.GetOwnUserIdUseCase
 import com.aold.socialnetwork.core.util.*
 import com.aold.socialnetwork.feature_profile.domain.use_case.ProfileUseCases
-import com.plcoding.socialnetworktwitch.feature_post.domain.use_case.PostUseCases
+import com.aold.socialnetwork.feature_post.use_case.PostUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow

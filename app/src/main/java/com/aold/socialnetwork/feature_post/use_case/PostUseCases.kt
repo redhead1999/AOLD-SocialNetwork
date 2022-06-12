@@ -1,7 +1,6 @@
-package com.plcoding.socialnetworktwitch.feature_post.domain.use_case
+package com.aold.socialnetwork.feature_post.use_case
 
-import com.aold.socialnetwork.feature_post.use_case.CreateCommentUseCase
-import com.plcoding.socialnetworktwitch.core.domain.use_case.DeletePost
+import com.aold.socialnetwork.core.domain.use_case.DeletePost
 
 data class PostUseCases(
     val getPostsForFollows: GetPostsForFollowsUseCase,

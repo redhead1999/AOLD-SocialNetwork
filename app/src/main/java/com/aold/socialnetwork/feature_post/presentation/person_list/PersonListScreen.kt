@@ -2,6 +2,7 @@ package com.aold.socialnetwork.feature_post.presentation.person_list
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PersonAdd
@@ -14,11 +15,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import com.aold.socialnetwork.R
-import com.aold.socialnetwork.core.domain.models.User
 import com.aold.socialnetwork.core.presentation.components.StandardToolbar
 import com.aold.socialnetwork.core.presentation.components.UserProfileItem
 import com.aold.socialnetwork.core.util.Screen
