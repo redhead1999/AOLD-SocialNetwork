@@ -3,6 +3,7 @@ package com.aold.socialnetwork.feature_post.presentation.post_detail
 import com.aold.socialnetwork.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
@@ -10,47 +11,92 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import coil.ImageLoader
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
 import com.aold.socialnetwork.core.domain.models.Comment
 import com.aold.socialnetwork.core.domain.models.Post
 import com.aold.socialnetwork.core.presentation.components.ActionRow
+import com.aold.socialnetwork.core.presentation.components.SendTextField
 import com.aold.socialnetwork.core.presentation.components.StandardToolbar
+import com.aold.socialnetwork.core.util.Screen
+import com.aold.socialnetwork.core.util.UiEvent
 import com.aold.socialnetwork.presentation.ui.theme.*
 
+@ExperimentalCoilApi
 @Composable
 fun PostDetailScreen(
-    navController: NavController,
+    scaffoldState: ScaffoldState,
+    imageLoader: ImageLoader,
+    onNavigate: (String) -> Unit = {},
     onNavigateUp: () -> Unit = {},
-    post: Post
+    //fixMe kuroro
+    //viewModel: PostDetailViewModel = hiltViewModel(),
+    shouldShowKeyboard: Boolean = false
 ) {
+    //fixMe kuroro
+    //val state = viewModel.state.value
+    //val commentTextFieldState = viewModel.commentTextFieldState.value
+
+    val focusRequester = remember {
+        FocusRequester()
+    }
+
+    val context = LocalContext.current
+    LaunchedEffect(key1 = true) {
+        if (shouldShowKeyboard) {
+            //fixMe kuroro
+            //context.showKeyboard()
+            focusRequester.requestFocus()
+        }
+        //fixMe kuroro
+        //viewModel.eventFlow.collectLatest { event ->
+//            when (event) {
+//                is UiEvent.ShowSnackBar -> {
+//                    scaffoldState.snackbarHostState.showSnackbar(
+//                        message = event.uiText.asString(context)
+//                    )
+//                }
+//            }
+//        }
+//
+//    }
+    }
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         StandardToolbar(
             onNavigateUp = onNavigateUp,
-            modifier = Modifier.fillMaxWidth(),
             title = {
                 Text(
-                    text = stringResource(id = R.string.your_post),
+                    text = stringResource(id = R.string.your_feed),
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colors.onBackground
                 )
-            }
+            },
+            modifier = Modifier.fillMaxWidth(),
+            showBackArrow = true,
         )
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colors.surface)
+                .weight(1f)
+                .background(MaterialTheme.colors.surface),
         ) {
             item {
                 Column(
@@ -60,7 +106,8 @@ fun PostDetailScreen(
                 ) {
                     Spacer(modifier = Modifier.height(SpaceLarge))
                     Box(
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier
+                            .fillMaxSize()
                     ) {
                         Column(
                             modifier = Modifier
@@ -70,140 +117,116 @@ fun PostDetailScreen(
                                 .shadow(5.dp)
                                 .background(MediumGray)
                         ) {
-                            Image(
-                                painterResource(id = R.drawable.kermit),
-                                contentDescription = "Post image",
-                                modifier = Modifier.fillMaxWidth()
-                            )
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(SpaceLarge)
-                            ) {
-                                ActionRow(
-                                    username = "Just_Amalll",
-                                    modifier = Modifier.fillMaxWidth(),
-                                    onLikeClick = {},
-                                    onCommentClick = {},
-                                    onShareClick = {},
-                                    onUsernameClick = { username -> }
-                                )
-                                Spacer(modifier = Modifier.height(SpaceSmall))
-                                Text(
-                                    text = post.description,
-                                    style = MaterialTheme.typography.body2
-                                )
-                                Spacer(modifier = Modifier.height(SpaceMedium))
-                                Text(
-                                    text = stringResource(
-                                        id = R.string.app_name,
-                                        post.likeCount
-                                    ),
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 16.sp,
-                                    style = MaterialTheme.typography.h2
-                                )
-                            }
+                            //fixMe kuroro
+//                            state.post?.let { post ->
+//                                Image(
+//                                    painter = rememberImagePainter(
+//                                        data = state.post.imageUrl,
+//                                        imageLoader = imageLoader
+//                                    ),
+//                                    contentScale = ContentScale.Crop,
+//                                    contentDescription = "Post image",
+//                                    modifier = Modifier
+//                                        .fillMaxWidth()
+//                                        .aspectRatio(16f / 9f)
+//                                )
+//                                Column(
+//                                    modifier = Modifier
+//                                        .fillMaxWidth()
+//                                        .padding(SpaceLarge)
+//                                ) {
+//                                    ActionRow(
+//                                        username = state.post.username,
+//                                        modifier = Modifier.fillMaxWidth(),
+//                                        onLikeClick = {
+//                                            viewModel.onEvent(PostDetailEvent.LikePost)
+//                                        },
+//                                        onCommentClick = {
+//                                            context.showKeyboard()
+//                                            focusRequester.requestFocus()
+//                                        },
+//                                        onShareClick = {
+//                                            context.sendSharePostIntent(post.id)
+//                                        },
+//                                        onUsernameClick = {
+//                                            onNavigate(Screen.ProfileScreen.route + "?userId=${post.userId}")
+//                                        },
+//                                        isLiked = state.post.isLiked
+//                                    )
+//                                    Spacer(modifier = Modifier.height(SpaceSmall))
+//                                    Text(
+//                                        text = state.post.description,
+//                                        style = MaterialTheme.typography.body2,
+//                                    )
+//                                    Spacer(modifier = Modifier.height(SpaceMedium))
+//                                    Text(
+//                                        text = stringResource(
+//                                            id = R.string.x_likes,
+//                                            post.likeCount
+//                                        ),
+//                                        fontWeight = FontWeight.Bold,
+//                                        style = MaterialTheme.typography.body2,
+//                                        modifier = Modifier.clickable {
+//                                            onNavigate(Screen.PersonListScreen.route + "/${post.id}")
+//
+//                                        }
+//                                    )
+//                                }
+//                            }
                         }
-                        Image(
-                            painterResource(id = R.drawable.me),
-                            contentDescription = "Profile picture",
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .size(ProfilePictureSizeMedium)
-                                .clip(CircleShape)
-                                .align(Alignment.TopCenter)
-                        )
+                        //fixMe kuroro
+//                        Image(
+//                            painter = rememberImagePainter(
+//                                data = state.post?.profilePictureUrl,
+//                                imageLoader = imageLoader
+//                            ),
+//                            contentDescription = "Profile picture",
+//                            modifier = Modifier
+//                                .size(ProfilePictureSizeMedium)
+//                                .clip(CircleShape)
+//                                .align(Alignment.TopCenter)
+//                        )
+//                        if (state.isLoadingPost) {
+//                            CircularProgressIndicator(
+//                                modifier = Modifier.align(Alignment.Center)
+//                            )
+//                        }
                     }
                 }
                 Spacer(modifier = Modifier.height(SpaceLarge))
             }
-            items(12) {
-                Comment(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = SpaceLarge, vertical = SpaceSmall),
-                    comment = Comment(
-                        username = "Amal $it",
-                        comment = "Nice picture!"
-                    )
-                )
-            }
+            //fixMe kuroro
+//            items(state.comments) { comment ->
+//                Comment(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(
+//                            horizontal = SpaceLarge,
+//                            vertical = SpaceSmall
+//                        ),
+//                    imageLoader = imageLoader,
+//                    comment = comment,
+//                    onLikeClick = {
+//                        viewModel.onEvent(PostDetailEvent.LikeComment(comment.id))
+//                    },
+//                    onLikedByClick = {
+//                        onNavigate(Screen.PersonListScreen.route + "/${comment.id}")
+//                    }
+//                )
+//            }
         }
-    }
-}
-
-@Composable
-fun Comment(
-    modifier: Modifier = Modifier,
-    comment: Comment = Comment(),
-    onLikeClick: (Boolean) -> Unit = {}
-) {
-    Card(
-        modifier = modifier,
-        elevation = 5.dp,
-        shape = MaterialTheme.shapes.medium,
-        backgroundColor = MaterialTheme.colors.onSurface,
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(SpaceMedium)
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Image(
-                        painter = painterResource(id = R.drawable.me),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .size(ProfilePictureSizeSmallComments)
-                    )
-                    Spacer(modifier = Modifier.width(SpaceSmall))
-                    Text(
-                        text = comment.username,
-                        fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.body2,
-                        color = MaterialTheme.colors.onBackground
-                    )
-                }
-                Text(
-                    text = "2 days ago",
-                    style = MaterialTheme.typography.body2
-                )
-            }
-            Spacer(modifier = Modifier.height(SpaceMedium))
-            Row(modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    text = comment.comment,
-                    style = MaterialTheme.typography.body2,
-                    color = MaterialTheme.colors.onBackground,
-                    modifier = Modifier.weight(9f)
-                )
-                Spacer(modifier = Modifier.width(SpaceMedium))
-                IconButton(
-                    onClick = { onLikeClick(comment.isLiked) },
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Favorite,
-                        contentDescription = if (comment.isLiked)
-                            stringResource(id = R.string.unlike)
-                        else stringResource(id = R.string.like)
-                    )
-                }
-            }
-            Spacer(modifier = Modifier.height(SpaceMedium))
-            Text(
-                text = stringResource(id = R.string.app_name, comment.likeCount),
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.body2,
-                color = MaterialTheme.colors.onBackground
-            )
-        }
+        //fixMe kuroro
+//        SendTextField(
+//            state = viewModel.commentTextFieldState.value,
+//            onValueChange = {
+//                viewModel.onEvent(PostDetailEvent.EnteredComment(it))
+//            },
+//            onSend = {
+//                viewModel.onEvent(PostDetailEvent.Comment)
+//            },
+//            hint = stringResource(id = R.string.enter_a_comment),
+//            isLoading = viewModel.commentState.value.isLoading,
+//            focusRequester = focusRequester
+//        )
     }
 }
