@@ -1,5 +1,6 @@
 package com.aold.socialnetwork.core.presentation.components
 
+import android.content.Intent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
@@ -12,6 +13,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import com.aold.socialnetwork.core.domain.models.Post
@@ -30,7 +32,6 @@ import com.aold.socialnetwork.feature_profile.search.SearchScreen
 import com.aold.socialnetwork.feature_post.presentation.main_feed.MainFeedScreen
 import com.aold.socialnetwork.feature_post.presentation.person_list.PersonListScreen
 import com.aold.socialnetwork.feature_post.presentation.post_detail.PostDetailScreen
-import kotlinx.coroutines.DelicateCoroutinesApi
 
 @ExperimentalComposeUiApi
 @ExperimentalCoilApi
@@ -56,7 +57,10 @@ fun Navigation(
             LoginScreen(
                 onNavigate = navController::navigate,
                 onLogin = {
-                    navController.popBackStack(route = Screen.LoginScreen.route, inclusive = true)
+                    navController.popBackStack(
+                        route = Screen.LoginScreen.route,
+                        inclusive = true
+                    )
                     navController.navigate(route = Screen.MainFeedScreen.route)
                 },
                 scaffoldState = scaffoldState
@@ -75,13 +79,6 @@ fun Navigation(
                 onNavigate = navController::navigate,
                 scaffoldState = scaffoldState,
                 imageLoader = imageLoader
-            )
-        }
-        composable(Screen.SearchChatScreen.route) {
-            SearchСhatScreen(
-                navController = navController,
-                onNavigateUp = navController::navigateUp,
-                onNavigate = navController::navigate,
             )
         }
         composable(Screen.ChatScreen.route) {
@@ -111,8 +108,7 @@ fun Navigation(
         ) {
             val remoteUserId = it.arguments?.getString("remoteUserId")!!
             val remoteUsername = it.arguments?.getString("remoteUsername")!!
-            val remoteUserProfilePictureUrl =
-                it.arguments?.getString("remoteUserProfilePictureUrl")!!
+            val remoteUserProfilePictureUrl = it.arguments?.getString("remoteUserProfilePictureUrl")!!
             MessageScreen(
                 remoteUserId = remoteUserId,
                 remoteUsername = remoteUsername,
@@ -137,19 +133,17 @@ fun Navigation(
                     defaultValue = null
                 }
             )
-        )
-        //fixMe kuroro
-//        ) {
-//            ProfileScreen(
-//                userId = it.arguments?.getString("userId"),
-//                onLogout = {
-//                    navController.navigate(route = Screen.LoginScreen.route)
-//                },
-//                onNavigate = navController::navigate,
-//                scaffoldState = scaffoldState,
-//                imageLoader = imageLoader
-//            )
-//        }
+        ) {
+            ProfileScreen(
+                userId = it.arguments?.getString("userId"),
+                onLogout = {
+                    navController.navigate(route = Screen.LoginScreen.route)
+                },
+                onNavigate = navController::navigate,
+                scaffoldState = scaffoldState,
+                imageLoader = imageLoader
+            )
+        }
         composable(
             Screen.EditProfileScreen.route + "/{userId}",
             arguments = listOf(
@@ -180,26 +174,52 @@ fun Navigation(
                 imageLoader = imageLoader
             )
         }
-        composable(Screen.PersonListScreen.route) {
+        composable(
+            route = Screen.PostDetailScreen.route + "/{postId}?shouldShowKeyboard={shouldShowKeyboard}",
+            arguments = listOf(
+                navArgument(
+                    name = "postId"
+                ) {
+                    type = NavType.StringType
+                },
+                navArgument(
+                    name = "shouldShowKeyboard"
+                ) {
+                    type = NavType.BoolType
+                    defaultValue = false
+                }
+            ),
+            deepLinks = listOf(
+                navDeepLink {
+                    action = Intent.ACTION_VIEW
+                    uriPattern = "https://pl-coding.com/{postId}"
+                }
+            )
+        ) {
+            val shouldShowKeyboard = it.arguments?.getBoolean("shouldShowKeyboard") ?: false
+            println("POST ID: ${it.arguments?.getString("postId")}")
+            PostDetailScreen(
+                scaffoldState = scaffoldState,
+                onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate,
+                shouldShowKeyboard = shouldShowKeyboard,
+                imageLoader = imageLoader
+            )
+        }
+        composable(
+            route = Screen.PersonListScreen.route + "/{parentId}",
+            arguments = listOf(
+                navArgument("parentId") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
             PersonListScreen(
-                navController = navController,
+                onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate,
                 scaffoldState = scaffoldState,
                 imageLoader = imageLoader
             )
         }
-        //fixMe kuroro
-//        composable(Screen.PostDetailScreen.route) {
-//            PostDetailScreen(
-//                navController = navController,
-//                post = Post(
-//                    username = "Just_Amalll",
-//                    imageUrl = "",
-//                    profilePictureUrl = "",
-//                    description = "Some Random Text Here",
-//                    likeCount = 17,
-//                    commentCount = 7
-//                )
-//            )
-//        }
     }
 }
