@@ -1,12 +1,11 @@
 package com.aold.socialnetwork.di
 
+import com.aold.socialnetwork.core.domain.use_case.DeletePost
 import com.google.gson.Gson
 import com.aold.socialnetwork.feature_post.data.remote.PostApi
 import com.aold.socialnetwork.feature_post.data.repository.PostRepositoryImpl
 import com.aold.socialnetwork.feature_post.domain.repository.PostRepository
-import com.aold.socialnetwork.feature_post.use_case.CreatePostUseCase
-import com.aold.socialnetwork.feature_post.use_case.GetPostsForFollowsUseCase
-import com.aold.socialnetwork.feature_post.use_case.PostUseCases
+import com.aold.socialnetwork.feature_post.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,11 +35,16 @@ object PostModule {
 
     @Provides
     @Singleton
-    fun providePostUseCases(
-        repository: PostRepository
-    ): PostUseCases = PostUseCases(
-        getPostsForFollows = GetPostsForFollowsUseCase(repository),
-        createPostUseCase = CreatePostUseCase(repository)
-    )
-
+    fun providePostUseCases(repository: PostRepository): PostUseCases {
+        return PostUseCases(
+            getPostsForFollows = GetPostsForFollowsUseCase(repository),
+            createPostUseCase = CreatePostUseCase(repository),
+            getPostDetails = GetPostDetailsUseCase(repository),
+            getCommentsForPost = GetCommentsForPostUseCase(repository),
+            createComment = CreateCommentUseCase(repository),
+            toggleLikeForParent = ToggleLikeForParentUseCase(repository),
+            getLikesForParent = GetLikesForParentUseCase(repository),
+            deletePost = DeletePost(repository)
+        )
+    }
 }
