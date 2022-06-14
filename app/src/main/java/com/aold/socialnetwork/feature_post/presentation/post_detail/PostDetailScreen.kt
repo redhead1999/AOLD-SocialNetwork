@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -35,9 +36,14 @@ import com.aold.socialnetwork.core.domain.models.Post
 import com.aold.socialnetwork.core.presentation.components.ActionRow
 import com.aold.socialnetwork.core.presentation.components.SendTextField
 import com.aold.socialnetwork.core.presentation.components.StandardToolbar
+import com.aold.socialnetwork.core.presentation.util.showKeyboard
 import com.aold.socialnetwork.core.util.Screen
 import com.aold.socialnetwork.core.util.UiEvent
+import com.aold.socialnetwork.core.util.asString
+import com.aold.socialnetwork.core.util.sendSharePostIntent
+import com.aold.socialnetwork.feature_post.presentation.post_detail.comment.Comment
 import com.aold.socialnetwork.presentation.ui.theme.*
+import kotlinx.coroutines.flow.collectLatest
 
 @ExperimentalCoilApi
 @Composable
@@ -46,13 +52,11 @@ fun PostDetailScreen(
     imageLoader: ImageLoader,
     onNavigate: (String) -> Unit = {},
     onNavigateUp: () -> Unit = {},
-    //fixMe kuroro
-    //viewModel: PostDetailViewModel = hiltViewModel(),
+    viewModel: PostDetailViewModel = hiltViewModel(),
     shouldShowKeyboard: Boolean = false
 ) {
-    //fixMe kuroro
-    //val state = viewModel.state.value
-    //val commentTextFieldState = viewModel.commentTextFieldState.value
+    val state = viewModel.state.value
+    val commentTextFieldState = viewModel.commentTextFieldState.value
 
     val focusRequester = remember {
         FocusRequester()
@@ -61,23 +65,20 @@ fun PostDetailScreen(
     val context = LocalContext.current
     LaunchedEffect(key1 = true) {
         if (shouldShowKeyboard) {
-            //fixMe kuroro
-            //context.showKeyboard()
+            context.showKeyboard()
             focusRequester.requestFocus()
         }
-        //fixMe kuroro
-        //viewModel.eventFlow.collectLatest { event ->
-//            when (event) {
-//                is UiEvent.ShowSnackBar -> {
-//                    scaffoldState.snackbarHostState.showSnackbar(
-//                        message = event.uiText.asString(context)
-//                    )
-//                }
-//            }
-//        }
-//
-//    }
+        viewModel.eventFlow.collectLatest { event ->
+            when (event) {
+                is UiEvent.ShowSnackBar -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.uiText.asString(context)
+                    )
+                }
+            }
+        }
     }
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -117,116 +118,112 @@ fun PostDetailScreen(
                                 .shadow(5.dp)
                                 .background(MediumGray)
                         ) {
-                            //fixMe kuroro
-//                            state.post?.let { post ->
-//                                Image(
-//                                    painter = rememberImagePainter(
-//                                        data = state.post.imageUrl,
-//                                        imageLoader = imageLoader
-//                                    ),
-//                                    contentScale = ContentScale.Crop,
-//                                    contentDescription = "Post image",
-//                                    modifier = Modifier
-//                                        .fillMaxWidth()
-//                                        .aspectRatio(16f / 9f)
-//                                )
-//                                Column(
-//                                    modifier = Modifier
-//                                        .fillMaxWidth()
-//                                        .padding(SpaceLarge)
-//                                ) {
-//                                    ActionRow(
-//                                        username = state.post.username,
-//                                        modifier = Modifier.fillMaxWidth(),
-//                                        onLikeClick = {
-//                                            viewModel.onEvent(PostDetailEvent.LikePost)
-//                                        },
-//                                        onCommentClick = {
-//                                            context.showKeyboard()
-//                                            focusRequester.requestFocus()
-//                                        },
-//                                        onShareClick = {
-//                                            context.sendSharePostIntent(post.id)
-//                                        },
-//                                        onUsernameClick = {
-//                                            onNavigate(Screen.ProfileScreen.route + "?userId=${post.userId}")
-//                                        },
-//                                        isLiked = state.post.isLiked
-//                                    )
-//                                    Spacer(modifier = Modifier.height(SpaceSmall))
-//                                    Text(
-//                                        text = state.post.description,
-//                                        style = MaterialTheme.typography.body2,
-//                                    )
-//                                    Spacer(modifier = Modifier.height(SpaceMedium))
-//                                    Text(
-//                                        text = stringResource(
-//                                            id = R.string.x_likes,
-//                                            post.likeCount
-//                                        ),
-//                                        fontWeight = FontWeight.Bold,
-//                                        style = MaterialTheme.typography.body2,
-//                                        modifier = Modifier.clickable {
-//                                            onNavigate(Screen.PersonListScreen.route + "/${post.id}")
-//
-//                                        }
-//                                    )
-//                                }
-//                            }
+                            state.post?.let { post ->
+                                Image(
+                                    painter = rememberImagePainter(
+                                        data = state.post.imageUrl,
+                                        imageLoader = imageLoader
+                                    ),
+                                    contentScale = ContentScale.Crop,
+                                    contentDescription = "Post image",
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .aspectRatio(16f / 9f)
+                                )
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(SpaceLarge)
+                                ) {
+                                    ActionRow(
+                                        username = state.post.username,
+                                        modifier = Modifier.fillMaxWidth(),
+                                        onLikeClick = {
+                                            viewModel.onEvent(PostDetailEvent.LikePost)
+                                        },
+                                        onCommentClick = {
+                                            context.showKeyboard()
+                                            focusRequester.requestFocus()
+                                        },
+                                        onShareClick = {
+                                            context.sendSharePostIntent(post.id)
+                                        },
+                                        onUsernameClick = {
+                                            onNavigate(Screen.ProfileScreen.route + "?userId=${post.userId}")
+                                        },
+                                        isLiked = state.post.isLiked
+                                    )
+                                    Spacer(modifier = Modifier.height(SpaceSmall))
+                                    Text(
+                                        text = state.post.description,
+                                        style = MaterialTheme.typography.body2,
+                                    )
+                                    Spacer(modifier = Modifier.height(SpaceMedium))
+                                    Text(
+                                        text = stringResource(
+                                            id = R.string.x_likes,
+                                            post.likeCount
+                                        ),
+                                        fontWeight = FontWeight.Bold,
+                                        style = MaterialTheme.typography.body2,
+                                        modifier = Modifier.clickable {
+                                            onNavigate(Screen.PersonListScreen.route + "/${post.id}")
+
+                                        }
+                                    )
+                                }
+                            }
                         }
-                        //fixMe kuroro
-//                        Image(
-//                            painter = rememberImagePainter(
-//                                data = state.post?.profilePictureUrl,
-//                                imageLoader = imageLoader
-//                            ),
-//                            contentDescription = "Profile picture",
-//                            modifier = Modifier
-//                                .size(ProfilePictureSizeMedium)
-//                                .clip(CircleShape)
-//                                .align(Alignment.TopCenter)
-//                        )
-//                        if (state.isLoadingPost) {
-//                            CircularProgressIndicator(
-//                                modifier = Modifier.align(Alignment.Center)
-//                            )
-//                        }
+                        Image(
+                            painter = rememberImagePainter(
+                                data = state.post?.profilePictureUrl,
+                                imageLoader = imageLoader
+                            ),
+                            contentDescription = "Profile picture",
+                            modifier = Modifier
+                                .size(ProfilePictureSizeMedium)
+                                .clip(CircleShape)
+                                .align(Alignment.TopCenter)
+                        )
+                        if (state.isLoadingPost) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.align(Alignment.Center)
+                            )
+                        }
                     }
                 }
                 Spacer(modifier = Modifier.height(SpaceLarge))
             }
-            //fixMe kuroro
-//            items(state.comments) { comment ->
-//                Comment(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(
-//                            horizontal = SpaceLarge,
-//                            vertical = SpaceSmall
-//                        ),
-//                    imageLoader = imageLoader,
-//                    comment = comment,
-//                    onLikeClick = {
-//                        viewModel.onEvent(PostDetailEvent.LikeComment(comment.id))
-//                    },
-//                    onLikedByClick = {
-//                        onNavigate(Screen.PersonListScreen.route + "/${comment.id}")
-//                    }
-//                )
-//            }
+            items(state.comments) { comment ->
+                Comment(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            horizontal = SpaceLarge,
+                            vertical = SpaceSmall
+                        ),
+                    imageLoader = imageLoader,
+                    comment = comment,
+                    onLikeClick = {
+                        viewModel.onEvent(PostDetailEvent.LikeComment(comment.id))
+                    },
+                    onLikedByClick = {
+                        onNavigate(Screen.PersonListScreen.route + "/${comment.id}")
+                    }
+                )
+            }
         }
-        //fixMe kuroro
-//        SendTextField(
-//            state = viewModel.commentTextFieldState.value,
-//            onValueChange = {
-//                viewModel.onEvent(PostDetailEvent.EnteredComment(it))
-//            },
-//            onSend = {
-//                viewModel.onEvent(PostDetailEvent.Comment)
-//            },
-//            hint = stringResource(id = R.string.enter_a_comment),
-//            isLoading = viewModel.commentState.value.isLoading,
-//            focusRequester = focusRequester
-//        )
+        SendTextField(
+            state = viewModel.commentTextFieldState.value,
+            onValueChange = {
+                viewModel.onEvent(PostDetailEvent.EnteredComment(it))
+            },
+            onSend = {
+                viewModel.onEvent(PostDetailEvent.Comment)
+            },
+            hint = stringResource(id = R.string.enter_a_comment),
+            isLoading = viewModel.commentState.value.isLoading,
+            focusRequester = focusRequester
+        )
     }
 }

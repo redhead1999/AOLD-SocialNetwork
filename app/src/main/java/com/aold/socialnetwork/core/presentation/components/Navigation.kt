@@ -16,14 +16,12 @@ import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
-import com.aold.socialnetwork.core.domain.models.Post
 import com.aold.socialnetwork.core.util.Screen
 import com.aold.socialnetwork.feature_activity.presentation.ActivityScreen
 import com.aold.socialnetwork.feature_auth.presentation.login.LoginScreen
 import com.aold.socialnetwork.feature_auth.presentation.register.RegisterScreen
 import com.aold.socialnetwork.feature_auth.presentation.splash.SplashScreen
 import com.aold.socialnetwork.feature_chat.presentation.chat.ChatScreen
-import com.aold.socialnetwork.feature_chat.presentation.chat_search.SearchСhatScreen
 import com.aold.socialnetwork.feature_chat.presentation.message.MessageScreen
 import com.aold.socialnetwork.feature_post.presentation.create_post.CreatePostScreen
 import com.aold.socialnetwork.feature_profile.presentation.edit_profile.EditProfileScreen
@@ -44,7 +42,7 @@ fun Navigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.MainFeedScreen.route,
+        startDestination = Screen.SplashScreen.route,
         modifier = Modifier.fillMaxSize()
     ) {
         composable(Screen.SplashScreen.route) {
