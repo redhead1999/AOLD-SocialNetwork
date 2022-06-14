@@ -10,6 +10,7 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -41,8 +42,11 @@ fun StandardTextField(
     isPasswordToggleDisplayed: Boolean = keyboardType == KeyboardType.Password,
     isPasswordVisible: Boolean = false,
     onPasswordToggleClick: (Boolean) -> Unit = {},
-    onValueChange: (String) -> Unit
-) {
+    onValueChange: (String) -> Unit,
+    focusRequester: FocusRequester = FocusRequester(),
+    backgroundColor: Color = MaterialTheme.colors.surface,
+
+    ) {
     Column(
         modifier = modifier.fillMaxWidth()
     ) {

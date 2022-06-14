@@ -90,4 +90,6 @@
     <string name="error_not_logged_in">Ой! Пожалуйста, войдите в систему, прежде чем сделать это...</string>
     <string name="enter_a_message">Написать сообщение...</string>
     <string name="message">Отправить сообщение</string>
+    <string name="delete_post">Удалить пост</string>
+    <string name="successfully_deleted_post">Пост успешно удалён</string>
 </resources>

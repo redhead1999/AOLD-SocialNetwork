@@ -1,8 +1,8 @@
 package com.aold.socialnetwork.feature_chat.presentation.chat
 
-import com.aold.socialnetwork.feature_chat.domain.models.Message
+import com.aold.socialnetwork.feature_chat.domain.models.Chat
 
 data class ChatState(
-    val messages: List<Message> = emptyList(),
+    val chats: List<Chat> = emptyList(),
     val isLoading: Boolean = false
 )
