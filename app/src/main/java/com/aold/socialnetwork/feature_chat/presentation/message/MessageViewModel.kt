@@ -6,6 +6,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aold.socialnetwork.core.domain.states.StandardTextFieldState
+import com.aold.socialnetwork.core.presentation.PagingState
+import com.aold.socialnetwork.core.presentation.util.UiEvent
 import com.aold.socialnetwork.core.util.*
 import com.aold.socialnetwork.feature_chat.domain.models.Message
 import com.aold.socialnetwork.feature_chat.domain.use_case.ChatUseCases

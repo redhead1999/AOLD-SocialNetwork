@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aold.socialnetwork.core.domain.states.StandardTextFieldState
 import com.aold.socialnetwork.core.util.Resource
-import com.aold.socialnetwork.core.util.UiEvent
+import com.aold.socialnetwork.core.presentation.util.UiEvent
 import com.aold.socialnetwork.core.util.UiText
 import com.aold.socialnetwork.feature_profile.domain.use_case.ProfileUseCases
 import com.aold.socialnetwork.feature_profile.domain.util.ProfileConstants
@@ -73,7 +73,8 @@ class SearchViewModel @Inject constructor(
                             } else it
                         }
                     )
-                    _eventFlow.emit(UiEvent.ShowSnackBar(
+                    _eventFlow.emit(
+                        UiEvent.ShowSnackBar(
                         uiText = result.uiText ?: UiText.unknownError()
                     ))
                 }

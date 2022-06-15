@@ -25,24 +25,21 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
-import com.aold.socialnetwork.core.domain.models.Post
 import com.aold.socialnetwork.core.domain.models.User
 import com.aold.socialnetwork.core.presentation.components.Post
-import com.aold.socialnetwork.core.presentation.components.StandardPost
+import com.aold.socialnetwork.core.presentation.util.UiEvent
+import com.aold.socialnetwork.core.presentation.util.asString
 import com.aold.socialnetwork.core.util.*
 import com.aold.socialnetwork.presentation.ui.theme.ProfilePictureSizeLarge
 import com.aold.socialnetwork.presentation.ui.theme.SpaceSmall
@@ -50,7 +47,6 @@ import com.aold.socialnetwork.feature_post.presentation.person_list.PostEvent
 import com.aold.socialnetwork.feature_profile.presentation.profile.components.BannerSection
 import com.aold.socialnetwork.feature_profile.presentation.profile.components.ProfileHeaderSection
 import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium
-import com.aold.socialnetwork.presentation.ui.theme.SpaceVeryLarge
 import kotlinx.coroutines.flow.collectLatest
 
 @ExperimentalCoilApi

@@ -1,4 +1,4 @@
-package com.aold.socialnetwork.core.util
+package com.aold.socialnetwork.core.domain.util
 
 import android.content.ContentResolver
 import android.net.Uri

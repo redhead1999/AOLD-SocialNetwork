@@ -1,9 +1,10 @@
-package com.aold.socialnetwork.core.util
+package com.aold.socialnetwork.core.presentation.util
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.activity.result.contract.ActivityResultContract
+import com.aold.socialnetwork.core.domain.util.getFileName
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCrop.RESULT_ERROR
 import java.io.File

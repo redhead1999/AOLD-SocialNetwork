@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aold.socialnetwork.core.util.Resource
-import com.aold.socialnetwork.core.util.UiEvent
+import com.aold.socialnetwork.core.presentation.util.UiEvent
 import com.aold.socialnetwork.core.util.UiText
 import com.aold.socialnetwork.feature_chat.domain.use_case.ChatUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -42,7 +42,8 @@ class ChatViewModel @Inject constructor(
                     )
                 }
                 is Resource.Error -> {
-                    _eventFlow.emit(UiEvent.ShowSnackBar(
+                    _eventFlow.emit(
+                        UiEvent.ShowSnackBar(
                         result.uiText ?: UiText.unknownError()
                     ))
                     _state.value = state.value.copy(isLoading = false)

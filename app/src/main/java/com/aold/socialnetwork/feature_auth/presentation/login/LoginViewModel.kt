@@ -8,7 +8,7 @@ import com.aold.socialnetwork.core.domain.states.StandardTextFieldState
 import com.aold.socialnetwork.core.util.Resource
 import com.aold.socialnetwork.core.util.UiText
 import com.aold.socialnetwork.feature_auth.domain.use_case.LoginUseCase
-import com.aold.socialnetwork.core.util.UiEvent
+import com.aold.socialnetwork.core.presentation.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow

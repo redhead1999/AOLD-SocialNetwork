@@ -1,6 +1,6 @@
 package com.aold.socialnetwork.feature_auth.domain.use_case
 
-import com.aold.socialnetwork.core.util.ValidationUtil
+import com.aold.socialnetwork.core.domain.util.ValidationUtil
 import com.aold.socialnetwork.feature_auth.domain.models.RegisterResult
 import com.aold.socialnetwork.feature_auth.domain.repository.AuthRepository
 

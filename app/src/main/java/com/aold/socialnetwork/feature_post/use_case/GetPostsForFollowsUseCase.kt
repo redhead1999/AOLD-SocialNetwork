@@ -8,7 +8,7 @@ import com.aold.socialnetwork.feature_post.domain.repository.PostRepository
 class GetPostsForFollowsUseCase(
     private val repository: PostRepository
 ) {
-    suspend fun invoke(
+    suspend operator fun invoke(
         page: Int,
         pageSize: Int = Constants.DEFAULT_PAGE_SIZE
     ): Resource<List<Post>> = repository.getPostsForFollows(page, pageSize)

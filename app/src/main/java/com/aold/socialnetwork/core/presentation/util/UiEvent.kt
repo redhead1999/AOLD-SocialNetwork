@@ -1,4 +1,7 @@
-package com.aold.socialnetwork.core.util
+package com.aold.socialnetwork.core.presentation.util
+
+import com.aold.socialnetwork.core.util.Event
+import com.aold.socialnetwork.core.util.UiText
 
 
 sealed class UiEvent: Event() {
