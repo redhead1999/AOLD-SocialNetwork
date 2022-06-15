@@ -1,6 +1,7 @@
-package com.aold.socialnetwork.core.util
+package com.aold.socialnetwork.core.domain.util
 
 import android.util.Patterns
+import com.aold.socialnetwork.core.util.Constants
 import com.aold.socialnetwork.feature_auth.presentation.util.AuthError
 
 object ValidationUtil {

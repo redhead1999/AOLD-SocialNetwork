@@ -21,8 +21,8 @@ import com.aold.socialnetwork.R
 import com.aold.socialnetwork.core.presentation.components.StandardToolbar
 import com.aold.socialnetwork.core.presentation.components.UserProfileItem
 import com.aold.socialnetwork.core.util.Screen
-import com.aold.socialnetwork.core.util.UiEvent
-import com.aold.socialnetwork.core.util.asString
+import com.aold.socialnetwork.core.presentation.util.UiEvent
+import com.aold.socialnetwork.core.presentation.util.asString
 import com.aold.socialnetwork.presentation.ui.theme.IconSizeMedium
 import com.aold.socialnetwork.presentation.ui.theme.SpaceLarge
 import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium

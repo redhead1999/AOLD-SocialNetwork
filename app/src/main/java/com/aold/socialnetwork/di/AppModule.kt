@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 import coil.ImageLoader
 import coil.decode.SvgDecoder
 import com.aold.socialnetwork.core.domain.use_case.GetOwnUserIdUseCase
-import com.aold.socialnetwork.core.presentation.util.DefaultPostLiker
+import com.aold.socialnetwork.core.util.DefaultPostLiker
 import com.google.gson.Gson
 import com.aold.socialnetwork.core.util.Constants
 import com.aold.socialnetwork.core.util.PostLiker

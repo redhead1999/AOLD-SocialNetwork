@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.aold.socialnetwork.core.domain.use_case.GetOwnUserIdUseCase
 import com.aold.socialnetwork.core.domain.use_case.ToggleFollowStateForUserUseCase
 import com.aold.socialnetwork.core.util.Resource
-import com.aold.socialnetwork.core.util.UiEvent
+import com.aold.socialnetwork.core.presentation.util.UiEvent
 import com.aold.socialnetwork.core.util.UiText
 import com.aold.socialnetwork.feature_post.use_case.PostUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -77,7 +77,8 @@ class PersonListViewModel @Inject constructor(
                             } else it
                         }
                     )
-                    _eventFlow.emit(UiEvent.ShowSnackBar(
+                    _eventFlow.emit(
+                        UiEvent.ShowSnackBar(
                         uiText = result.uiText ?: UiText.unknownError()
                     ))
                 }

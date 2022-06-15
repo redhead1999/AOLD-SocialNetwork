@@ -33,12 +33,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.aold.socialnetwork.core.domain.models.User
 import com.aold.socialnetwork.core.presentation.components.Post
+import com.aold.socialnetwork.core.presentation.util.UiEvent
+import com.aold.socialnetwork.core.presentation.util.asString
 import com.aold.socialnetwork.core.util.*
 import com.aold.socialnetwork.presentation.ui.theme.ProfilePictureSizeLarge
 import com.aold.socialnetwork.presentation.ui.theme.SpaceSmall

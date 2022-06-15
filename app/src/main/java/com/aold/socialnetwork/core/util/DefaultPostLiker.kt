@@ -1,9 +1,6 @@
-package com.aold.socialnetwork.core.presentation.util
+package com.aold.socialnetwork.core.util
 
 import com.aold.socialnetwork.core.domain.models.Post
-import com.aold.socialnetwork.core.util.PostLiker
-import com.aold.socialnetwork.core.util.Resource
-import com.aold.socialnetwork.core.util.SimpleResource
 
 class DefaultPostLiker: PostLiker {
 

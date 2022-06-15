@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aold.socialnetwork.R
 import com.aold.socialnetwork.core.domain.states.StandardTextFieldState
+import com.aold.socialnetwork.core.presentation.util.UiEvent
 import com.aold.socialnetwork.core.util.*
 import com.aold.socialnetwork.feature_auth.domain.use_case.AuthenticateUseCase
 import com.aold.socialnetwork.feature_post.presentation.post_detail.comment.CommentState
@@ -176,7 +177,8 @@ class PostDetailViewModel @Inject constructor(
             )
             when(result) {
                 is Resource.Success -> {
-                    _eventFlow.emit(UiEvent.ShowSnackBar(
+                    _eventFlow.emit(
+                        UiEvent.ShowSnackBar(
                         uiText = UiText.StringResource(R.string.comment_posted)
                     ))
                     _commentState.value = commentState.value.copy(
@@ -189,7 +191,8 @@ class PostDetailViewModel @Inject constructor(
                     loadCommentsForPost(postId)
                 }
                 is Resource.Error -> {
-                    _eventFlow.emit(UiEvent.ShowSnackBar(
+                    _eventFlow.emit(
+                        UiEvent.ShowSnackBar(
                         uiText = result.uiText ?: UiText.unknownError()
                     ))
                     _commentState.value = commentState.value.copy(

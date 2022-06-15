@@ -21,7 +21,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -29,26 +28,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
-import com.aold.socialnetwork.core.domain.states.StandardTextFieldState
 import com.aold.socialnetwork.core.presentation.components.StandardTextField
 import com.aold.socialnetwork.core.presentation.components.StandardToolbar
-import com.aold.socialnetwork.core.util.CropActivityResultContract
-import com.aold.socialnetwork.core.util.Screen
-import com.aold.socialnetwork.core.util.UiEvent
-import com.aold.socialnetwork.core.util.asString
+import com.aold.socialnetwork.core.presentation.util.CropActivityResultContract
+import com.aold.socialnetwork.core.presentation.util.UiEvent
+import com.aold.socialnetwork.core.presentation.util.asString
 import com.aold.socialnetwork.feature_profile.presentation.edit_profile.components.Chip
 import com.aold.socialnetwork.feature_profile.util.EditProfileError
 import com.aold.socialnetwork.presentation.ui.theme.ProfilePictureSizeLarge
 import com.aold.socialnetwork.presentation.ui.theme.SpaceLarge
 import com.aold.socialnetwork.presentation.ui.theme.SpaceMedium
 import kotlinx.coroutines.flow.collectLatest
-import kotlin.random.Random
 
 @ExperimentalCoilApi
 @Composable

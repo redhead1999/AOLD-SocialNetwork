@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aold.socialnetwork.R
 import com.aold.socialnetwork.core.domain.models.Post
+import com.aold.socialnetwork.core.presentation.PagingState
+import com.aold.socialnetwork.core.presentation.util.UiEvent
 import com.aold.socialnetwork.core.util.*
 import com.aold.socialnetwork.feature_post.use_case.PostUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
